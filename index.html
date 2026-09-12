@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PISSLA — the dog that marks electric cars</title>
+<meta name="description" content="$PISSLA. one dog, one bladder, a street full of white electric cars. the wheel is the target, the alarm is the risk.">
+<link rel="icon" href="assets/favicon.png">
+<meta property="og:title" content="PISSLA — the dog that marks electric cars">
+<meta property="og:description" content="one dog, one bladder, a street full of white electric cars.">
+<meta property="og:image" content="assets/scene.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Chakra+Petch:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0c0e; --panel:#141719; --panel2:#1b1f22; --line:#2b3136;
+  --ink:#0a0b0c; --text:#e6eaed; --dim:#8d979e;
+  --piss:#ffd21e; --piss2:#ffe873; --acid:#8bfa36; --red:#ff4b3e;
+  --rad:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:"Chakra Petch",system-ui,sans-serif;
+  overflow-x:clip; -webkit-font-smoothing:antialiased;
+}
+body.locked{overflow:hidden;height:100vh}
+img{display:block;max-width:100%}
+a{color:inherit}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.wrap{width:min(1180px,100% - 34px);margin-inline:auto}
+
+/* ---------- films ---------- */
+.film{position:fixed;inset:0;pointer-events:none;z-index:90}
+.scan{background:repeating-linear-gradient(rgba(0,0,0,.26) 0 1px,transparent 1px 4px);opacity:.5}
+.grain{background-image:radial-gradient(rgba(255,255,255,.55) .5px,transparent .6px);background-size:3px 3px;mix-blend-mode:overlay;opacity:.09}
+.vig{background:radial-gradient(ellipse at 50% 42%,#0000 48%,rgba(0,0,0,.72) 100%)}
+
+/* ---------- gate ---------- */
+#gate{position:fixed;inset:0;z-index:200;background:
+  radial-gradient(ellipse at 50% 40%,#1b2a12 0%,#07080a 62%);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;text-align:center;padding:20px}
+#gate .card{max-width:560px}
+#gate .badge{font-size:12px;letter-spacing:.34em;color:var(--acid);margin-bottom:18px}
+#gate h1{font-family:"Archivo Black",sans-serif;font-size:clamp(46px,12vw,110px);margin:0;letter-spacing:.06em;
+  color:#fff;text-shadow:0 0 40px rgba(255,210,30,.35)}
+#gate p{color:var(--dim);font-size:15px;line-height:1.6;margin:16px auto 26px;max-width:430px}
+#gate .key{display:inline-flex;align-items:center;gap:12px;border:1px solid var(--line);background:#11151888;
+  padding:14px 26px;border-radius:999px;font-size:13px;letter-spacing:.24em;color:var(--text)}
+#gate .key b{width:9px;height:9px;border-radius:50%;background:var(--piss);box-shadow:0 0 14px var(--piss);animation:blink 1.3s infinite}
+@keyframes blink{50%{opacity:.15}}
+#gate.off{opacity:0;pointer-events:none;transition:opacity .5s}
+
+/* ---------- top bar ---------- */
+.topbar{position:sticky;top:0;z-index:80;background:rgba(10,11,13,.86);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+.topbar .in{display:flex;align-items:center;gap:12px;padding:9px 0;width:min(1180px,100% - 34px);margin-inline:auto}
+.logo{font-family:"Archivo Black",sans-serif;letter-spacing:.16em;font-size:17px}
+.logo span{color:var(--piss)}
+.tb-sp{flex:1}
+.tb-btn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:999px;
+  padding:7px 13px;font:600 11px/1 "Chakra Petch",sans-serif;letter-spacing:.13em;cursor:pointer}
+.tb-btn:hover{border-color:var(--piss);color:var(--piss)}
+.tb-btn.on{color:var(--acid);border-color:#3e6b22}
+
+/* ---------- marquee ---------- */
+.mq{background:var(--piss);color:#141000;overflow:hidden;white-space:nowrap;border-bottom:2px solid #000}
+.mq div{display:inline-block;padding:6px 0;animation:mq 34s linear infinite;font-weight:700;letter-spacing:.13em;font-size:12px}
+.mq span{padding:0 22px}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:26px 0 40px;
+  background:
+   radial-gradient(1100px 420px at 78% 34%,rgba(139,250,54,.10),transparent 70%),
+   radial-gradient(700px 400px at 12% 20%,rgba(255,210,30,.08),transparent 70%)}
+.hero-in{display:grid;grid-template-columns:1.02fr .98fr;gap:26px;align-items:center}
+.kicker{font-size:11px;letter-spacing:.34em;color:var(--acid);margin-bottom:12px}
+.mark{font-family:"Archivo Black",sans-serif;font-size:clamp(52px,9.2vw,106px);line-height:.86;margin:0;letter-spacing:.02em;
+  background:linear-gradient(#ffffff 30%,#ffe873 60%,#e8a800 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  -webkit-text-stroke:3px #000;paint-order:stroke fill;
+  filter:drop-shadow(0 6px 0 #7a5a00) drop-shadow(0 12px 0 #3a2b00) drop-shadow(0 20px 28px rgba(255,210,30,.22))}
+.tick{display:inline-block;margin-top:10px;font:600 13px/1 "IBM Plex Mono",monospace;letter-spacing:.2em;
+  color:#141000;background:var(--piss);padding:6px 12px;border-radius:6px;transform:rotate(-1.4deg)}
+.slog{font-size:clamp(17px,2.1vw,23px);font-weight:700;margin:14px 0 10px;line-height:1.28}
+.lore{color:#b9c3c9;font-size:15px;line-height:1.66;margin:0 0 12px;max-width:56ch}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btn{display:inline-flex;align-items:center;gap:9px;border:2px solid #000;border-radius:11px;padding:13px 20px;
+  font:700 14px/1 "Chakra Petch",sans-serif;letter-spacing:.1em;text-decoration:none;cursor:pointer;
+  background:var(--piss);color:#141000;box-shadow:0 5px 0 #000;transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #000}
+.btn.ghost{background:var(--panel);color:var(--text);border-color:var(--line);box-shadow:0 5px 0 #000}
+.btn.acid{background:var(--acid);color:#0d1a04}
+.btn.soon{filter:grayscale(1) brightness(.72);cursor:not-allowed}
+.btn.soon::after{content:"soon";font-size:10px;opacity:.8;letter-spacing:.16em}
+#caBox{display:inline-flex;align-items:center;gap:10px;margin-top:16px;border:1px dashed #3a4248;border-radius:10px;
+  padding:9px 13px;font:400 12px/1 "IBM Plex Mono",monospace;color:var(--dim);cursor:pointer;background:#10141688}
+#caBox b{color:var(--piss);font-weight:600}
+
+.portrait{position:relative}
+.pframe{position:relative;border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  background:
+   linear-gradient(#171b1e,#0e1113);
+  box-shadow:0 30px 70px rgba(0,0,0,.6), inset 0 0 0 1px #ffffff08}
+.pframe .asph{position:absolute;left:0;right:0;bottom:0;height:38%;
+  background:linear-gradient(#23282c,#14181a);border-top:1px solid #343b40}
+.pframe .asph::after{content:"";position:absolute;top:44%;left:-10%;right:-10%;height:5px;
+  background:repeating-linear-gradient(90deg,#ffd21e55 0 42px,transparent 42px 92px);filter:blur(.4px)}
+.pframe img.scene{position:relative;width:100%;height:auto;cursor:pointer;
+  filter:drop-shadow(0 18px 16px rgba(0,0,0,.55));animation:sway 5.4s ease-in-out infinite alternate;transform-origin:20% 90%}
+@keyframes sway{to{transform:rotate(.7deg) translateY(-5px)}}
+.spark{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--piss);pointer-events:none;opacity:0;
+  box-shadow:0 0 9px var(--piss2)}
+.poke{position:absolute;left:4%;top:6%;z-index:4;background:#000;color:var(--piss);border:2px solid var(--piss);
+  border-radius:999px;padding:7px 13px;font:700 11px/1 "Chakra Petch",sans-serif;letter-spacing:.14em;
+  transform:rotate(-5deg);box-shadow:4px 4px 0 rgba(0,0,0,.5);animation:bob 2.4s ease-in-out infinite alternate}
+@keyframes bob{to{transform:rotate(-5deg) translateY(-7px)}}
+.playnow{position:absolute;right:3%;bottom:5%;z-index:5}
+#drop{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6;border-radius:20px}
+.coin{position:absolute;width:26px;height:26px;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,#fff6c9,#ffd21e 46%,#b98600 100%);
+  border:2px solid #6d5200;box-shadow:0 0 10px rgba(255,210,30,.45)}
+.coin::after{content:"P";position:absolute;inset:0;display:grid;place-items:center;font:700 12px/1 "Archivo Black",sans-serif;color:#6d5200}
+.hudrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chip{border:1px solid var(--line);background:#0f1315;border-radius:8px;padding:7px 11px;
+  font:400 11px/1 "IBM Plex Mono",monospace;color:var(--dim);letter-spacing:.08em}
+.chip b{color:var(--acid);font-weight:600}
+
+/* ---------- sections ---------- */
+section{padding:58px 0}
+.sechead{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;flex-wrap:wrap}
+.sechead h2{font-family:"Archivo Black",sans-serif;font-size:clamp(26px,4.4vw,44px);margin:0;letter-spacing:.03em}
+.sechead .no{font:400 12px/1 "IBM Plex Mono",monospace;color:var(--piss);letter-spacing:.2em}
+.sub{color:var(--dim);font-size:14.5px;line-height:1.6;max-width:70ch;margin:0 0 24px}
+
+/* ---------- game console ---------- */
+.console{border:1px solid var(--line);border-radius:22px;background:linear-gradient(#15191c,#0d1012);
+  box-shadow:0 24px 60px rgba(0,0,0,.55), inset 0 1px 0 #ffffff0f;padding:14px}
+.cbar{display:flex;align-items:center;gap:10px;padding:4px 6px 12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cbar .dotr{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);animation:blink 1.6s infinite}
+.cbar .tt{font:600 12px/1 "Chakra Petch";letter-spacing:.22em;color:var(--text)}
+.cbar .sp{flex:1}
+.cbar .st{font:400 11px/1 "IBM Plex Mono",monospace;color:var(--dim);letter-spacing:.1em}
+.cwrap{display:grid;grid-template-columns:1fr 258px;gap:14px;padding-top:14px}
+.stage{position:relative;border-radius:14px;overflow:hidden;background:#0a0d0f;border:1px solid #232a2e}
+#game{display:block;width:100%;height:auto;touch-action:none;cursor:crosshair}
+.gmsg{position:absolute;left:50%;top:15%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;
+  font-family:"Archivo Black",sans-serif;font-size:clamp(16px,2.4vw,26px);letter-spacing:.06em;color:#fff;
+  text-shadow:0 4px 0 #000,0 0 30px rgba(255,210,30,.6);opacity:0;transition:opacity .25s}
+.gmsg.on{opacity:1}
+.gstart{position:absolute;inset:0;display:grid;place-items:center;background:rgba(7,9,11,.86);backdrop-filter:blur(3px);z-index:3;text-align:center;padding:18px}
+.gstart.off{display:none}
+.gstart p{color:var(--dim);font-size:13.5px;line-height:1.6;max-width:46ch;margin:12px auto 20px}
+.meters{display:grid;gap:9px}
+.meter{background:#0f1315;border:1px solid var(--line);border-radius:11px;padding:9px 11px}
+.meter .lab{display:flex;justify-content:space-between;font:400 10.5px/1 "IBM Plex Mono",monospace;color:var(--dim);letter-spacing:.12em;margin-bottom:7px}
+.meter .lab b{color:var(--text);font-weight:600}
+.bar{height:9px;border-radius:6px;background:#22282c;overflow:hidden}
+.bar i{display:block;height:100%;width:0%;border-radius:6px;transition:width .12s linear}
+#bBladder i{background:linear-gradient(90deg,#ffe873,#ffd21e)}
+#bSentry i{background:linear-gradient(90deg,#ff9d3e,#ff4b3e)}
+#bFill i{background:linear-gradient(90deg,#8bfa36,#39d2ff)}
+.book{background:#0f1315;border:1px solid var(--line);border-radius:11px;padding:10px 11px;max-height:196px;overflow:auto}
+.book h4{margin:0 0 8px;font:600 10.5px/1 "IBM Plex Mono",monospace;letter-spacing:.16em;color:var(--dim)}
+.book li{list-style:none;font:400 11.5px/1.35 "IBM Plex Mono",monospace;color:#5d666c;padding:5px 0;border-bottom:1px dashed #232a2e;display:flex;gap:8px}
+.book li:last-child{border:0}
+.book li.done{color:var(--acid)}
+.book li.now{color:var(--piss)}
+.book li em{font-style:normal;opacity:.65}
+.gbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.gbtn{flex:1;min-width:96px;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;
+  padding:11px 8px;font:700 11.5px/1 "Chakra Petch";letter-spacing:.13em;cursor:pointer;
+  box-shadow:inset 0 1px 0 #ffffff12}
+.gbtn:hover{border-color:var(--piss)}
+.gbtn.pump{background:var(--piss);color:#141000;border-color:#000}
+.gbtn:disabled{opacity:.42;cursor:not-allowed}
+.hint{font:400 11px/1.5 "IBM Plex Mono",monospace;color:#5d666c;margin-top:10px;letter-spacing:.04em}
+
+/* ---------- cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.card{position:relative;min-width:0;border:1px solid var(--line);border-radius:15px;background:var(--panel);padding:15px;
+  overflow:hidden;transition:border-color .2s,transform .2s}
+.card .idx{font:400 10.5px/1 "IBM Plex Mono",monospace;color:var(--piss);letter-spacing:.2em}
+.card h3{font-family:"Archivo Black",sans-serif;font-size:15.5px;margin:9px 0 8px;letter-spacing:.03em}
+.card p{font-size:13.4px;line-height:1.55;color:#aab4ba;margin:0}
+.card.lock .h{filter:blur(7px);opacity:.35;user-select:none}
+.card.lock::after{content:"LOCKED · MARK CAR " attr(data-n);position:absolute;inset:0;display:grid;place-items:center;
+  background:repeating-linear-gradient(45deg,#0d1012 0 12px,#11161a 12px 24px);
+  font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;color:#4a5359}
+.card.open{border-color:#3e6b22;transform:translateY(-3px)}
+
+/* ---------- notes ---------- */
+.notes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.note{min-width:0;border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden;display:flex;flex-direction:column}
+.note .im{aspect-ratio:4/3;overflow:hidden;background:#0e1214;border-bottom:1px solid var(--line)}
+.note .im img{width:100%;height:100%;object-fit:cover;object-position:center}
+.note .tx{padding:15px}
+.note h3{font-family:"Archivo Black",sans-serif;font-size:15px;margin:0 0 8px;letter-spacing:.03em}
+.note p{margin:0;font-size:13.4px;line-height:1.58;color:#aab4ba}
+
+/* ---------- spec ---------- */
+.spec{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel)}
+.spec .row{display:grid;grid-template-columns:210px 1fr;gap:16px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.spec .row:last-child{border:0}
+.spec .k{font-family:"Archivo Black",sans-serif;font-size:15px;letter-spacing:.04em}
+.spec .k em{display:block;font:400 11px/1.4 "IBM Plex Mono",monospace;color:var(--piss);font-style:normal;margin-top:6px;letter-spacing:.12em}
+.spec .v{font-size:13.8px;line-height:1.6;color:#aab4ba}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:34px 0 60px;background:#08090b}
+.fin{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.fin img{width:56px;height:56px;border-radius:50%;border:2px solid var(--line);background:#101416}
+.fin .t{flex:1;min-width:200px}
+.fin .t b{font-family:"Archivo Black",sans-serif;letter-spacing:.1em}
+.fin .t p{margin:6px 0 0;color:#5d666c;font-size:12.5px;line-height:1.5}
+
+/* ---------- win overlay ---------- */
+#rain{position:fixed;inset:0;pointer-events:none;z-index:140;overflow:hidden}
+#win{position:fixed;inset:0;z-index:150;display:none;place-items:center;background:rgba(6,8,10,.88);padding:20px}
+#win.on{display:grid}
+#win .w{max-width:560px;text-align:center;border:2px solid var(--piss);border-radius:20px;background:#0e1214;padding:30px 26px;
+  box-shadow:0 0 90px rgba(255,210,30,.25)}
+#win h2{font-family:"Archivo Black",sans-serif;font-size:clamp(26px,6vw,44px);margin:0 0 6px;color:var(--piss)}
+#win p{color:#b9c3c9;font-size:14.5px;line-height:1.6}
+#win img{width:130px;margin:8px auto 4px}
+
+@media(max-width:1000px){
+  .hero-in{grid-template-columns:1fr}
+  .hero-in>div:last-child{order:-1}
+  .pframe img.scene{width:100%;height:auto;max-height:none}
+  .cwrap{grid-template-columns:1fr}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .notes{grid-template-columns:1fr}
+  .spec .row{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .cards{grid-template-columns:1fr}
+  section{padding:42px 0}
+  .btn{padding:12px 15px;font-size:12.5px}
+  .book{max-height:150px}
+}
+@media (min-width:1000px) and (max-height:780px){
+  .hero{padding:16px 0 26px}
+  .mark{font-size:clamp(46px,6.4vw,78px)}
+  .lore{font-size:14px;line-height:1.55;margin-bottom:8px}
+  .slog{font-size:19px;margin:10px 0 8px}
+  .btns{margin-top:13px}
+  .hudrow{margin-top:10px}
+  #caBox{margin-top:10px}
+  .kicker{margin-bottom:8px}
+}
+@media(max-width:560px){
+  .tb-btn{padding:6px 9px;font-size:10px;white-space:nowrap}
+  .topbar .in{gap:7px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body class="locked">
+
+<div class="film scan"></div>
+<div class="film grain"></div>
+<div class="film vig"></div>
+
+<div id="gate">
+  <div class="card">
+    <div class="badge">PARKING LOT · 04:12 · ONE DOG DETECTED</div>
+    <h1>PISSLA</h1>
+    <p>a shiba with sunglasses walks the block every night and marks every white electric car he can reach. the wheel is the target. the alarm is the risk.</p>
+    <div class="key"><b></b> TAP ANYWHERE TO UNLOCK</div>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="in">
+    <div class="logo">PIS<span>SLA</span></div>
+    <div class="tb-sp"></div>
+    <button class="tb-btn" id="sfxBtn">SOUND: ON</button>
+    <button class="tb-btn" id="musBtn">MUSIC: OFF</button>
+    <a class="tb-btn xLink" href="#" target="_blank" rel="noopener">X</a>
+  </div>
+</div>
+
+<div class="mq"><div id="mqin"></div></div>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <div class="kicker">ONE DOG · ONE BLADDER · A STREET FULL OF ELECTRIC CARS</div>
+      <h1 class="mark">PISSLA</h1>
+      <div class="tick mono">$PISSLA · TICKER</div>
+      <p class="slog">nobody knows why i hate these cars. i see one, i mark the wheel, i walk away.</p>
+      <p class="lore">it started on a tuesday. a white electric sedan parked where the fire hydrant used to be, it made no sound at all, and something in me said that thing needs to know who lives here. i have been on schedule ever since.</p>
+      <p class="lore">the job has rules. wheels only, never the paint, never the door handles. the cars have cameras now and the alarm goes off if you aim high, so you learn the wind, you learn the angle, and you keep your tank topped up between rounds.</p>
+      <div class="btns">
+        <a class="btn soon" id="buyBtn" href="#">BUY $PISSLA</a>
+        <a class="btn ghost xLink" id="xBtn" href="#" target="_blank" rel="noopener">FOLLOW ON X</a>
+        <a class="btn acid" href="#mark">▶ PLAY MARK MODE</a>
+      </div>
+      <div id="caBox"><span>CA</span> <b class="ca-val">not deployed yet</b> <span>· tap to copy</span></div>
+      <div class="hudrow">
+        <div class="chip">RANGE <b>411 km</b></div>
+        <div class="chip">TANK <b>0.34 L</b></div>
+        <div class="chip">CARS MARKED TONIGHT <b id="chipCars">0</b></div>
+        <div class="chip">NOISE <b>0 dB</b></div>
+      </div>
+    </div>
+
+    <div class="portrait">
+      <div class="pframe">
+        <div class="asph"></div>
+        <div class="poke">poke him · he pays</div>
+        <img class="scene" id="heroImg" src="assets/scene.webp" alt="a shiba in sunglasses marking the front wheel of a white electric car while it charges">
+        <div id="drop"></div>
+        <a class="btn acid playnow" href="#mark">▶ MARK MODE</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="mark">
+  <div class="wrap">
+    <div class="sechead"><span class="no">01</span><h2>MARK MODE</h2></div>
+    <p class="sub">hold to pour, let go to stop. the front wheel counts, the paint sets off the alarm, and the tank does not refill itself. eight cars on the block, then the round is done.</p>
+
+    <div class="console">
+      <div class="cbar">
+        <span class="dotr"></span><span class="tt">NIGHT ROUND · SECTOR 7</span>
+        <span class="sp"></span>
+        <span class="st" id="clock">04:12</span>
+        <span class="st" id="windTxt">WIND 0 km/h</span>
+        <span class="st">EXT −2°C</span>
+      </div>
+      <div class="cwrap">
+        <div class="stage">
+          <canvas id="game" width="960" height="540"></canvas>
+          <div class="gmsg" id="gmsg"></div>
+          <div class="gstart" id="gstart">
+            <div>
+              <h3 style="font-family:'Archivo Black';font-size:clamp(20px,4vw,32px);margin:0;letter-spacing:.04em">START THE ROUND</h3>
+              <p>hold the mouse (or your finger, or space) to pour. aim at the front wheel, mind the wind, and stay off the paint — the car watches you and the alarm ends the visit.</p>
+              <button class="btn acid" id="startBtn" style="border-color:#000">▶ BEGIN · 8 CARS</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="meters">
+            <div class="meter">
+              <div class="lab"><span>TANK</span><b id="vB">100%</b></div>
+              <div class="bar" id="bBladder"><i style="width:100%"></i></div>
+            </div>
+            <div class="meter">
+              <div class="lab"><span>WHEEL COVERAGE</span><b id="vF">0%</b></div>
+              <div class="bar" id="bFill"><i></i></div>
+            </div>
+            <div class="meter">
+              <div class="lab"><span>ALARM</span><b id="vS">0%</b></div>
+              <div class="bar" id="bSentry"><i></i></div>
+            </div>
+          </div>
+          <div class="gbtns">
+            <button class="gbtn pump" id="drinkBtn">DRINK +45</button>
+            <button class="gbtn" id="resetBtn">RESTART</button>
+          </div>
+          <div class="book">
+            <h4>ROUND BOOK · <span id="bookCount">0/8</span></h4>
+            <ul id="bookList"></ul>
+          </div>
+          <div class="hint">hold = pour · release = stop<br>the puddle on the asphalt is wasted tank</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="no">02</span><h2>THE ROUND BOOK</h2></div>
+    <p class="sub">one page per car. they open as you mark them, because i do not write about a car i have not met.</p>
+    <div class="cards" id="cardGrid"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="no">03</span><h2>FIELD NOTES</h2></div>
+    <p class="sub">three things i have learned doing this every night for eleven months.</p>
+    <div class="notes">
+      <div class="note">
+        <div class="im"><img src="assets/wheel.webp" alt="the aftermath at the front wheel, yellow still running down the rim"></div>
+        <div class="tx">
+          <h3>THE WHEEL IS THE MAILBOX</h3>
+          <p>the wheel is the only part of the car that touches the street, which makes it the only part that belongs to me. everything above it is theirs and i respect the border. that is the whole etiquette, i did not invent it, i just follow it precisely.</p>
+        </div>
+      </div>
+      <div class="note">
+        <div class="im"><img src="assets/front.webp" alt="the front of a white electric car, headlight open, a yellow puddle spreading under the tire"></div>
+        <div class="tx">
+          <h3>THEY DRIVE UP QUIET</h3>
+          <p>these things roll in with no engine sound and park behind you while you are working, which is rude and, frankly, a little sinister. i started keeping one ear pointed at the entrance of the lot. it has saved me twice this month.</p>
+        </div>
+      </div>
+      <div class="note">
+        <div class="im"><img src="assets/face.webp" alt="the shiba in sunglasses, calm, mid-shift"></div>
+        <div class="tx">
+          <h3>SUNGLASSES AT NIGHT</h3>
+          <p>the cameras on these cars record everything and the owners watch it on their phones in the morning. the glasses are not a style choice, they are equipment. so far nobody has recognised me at the dog park, so the equipment works.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="no">04</span><h2>SPEC SHEET</h2></div>
+    <p class="sub">the numbers, in my own words, because somebody always asks.</p>
+    <div class="spec">
+      <div class="row"><div class="k">SUPPLY<em>1,000,000,000</em></div><div class="v">one billion, minted once, and that is the last time anybody touches the number. i counted them myself, which took most of a night, and i am not doing it again. if a second batch ever appears it did not come from this dog.</div></div>
+      <div class="row"><div class="k">LIQUIDITY<em>BURNED</em></div><div class="v">the key went into the storm drain on the corner of the lot, next to the car that started all of this. nobody is fishing it out. that was the point of throwing it there.</div></div>
+      <div class="row"><div class="k">TAX<em>0 / 0</em></div><div class="v">zero on the way in, zero on the way out, because i already take my cut in a way that does not require a wallet. buy, sell, sit on it — none of it changes what i do at four in the morning.</div></div>
+      <div class="row"><div class="k">OWNERSHIP<em>RENOUNCED</em></div><div class="v">the contract is not mine anymore and neither is the street, technically. i still walk both of them every night out of habit. the difference is nobody can change the rules on either one now.</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap fin">
+    <img src="assets/ava.webp" alt="portrait of the dog on duty">
+    <div class="t">
+      <b>$PISSLA</b>
+      <p>sector 7 · nightly rounds · wheels only<br><span class="ca-val mono">contract goes here on launch</span></p>
+    </div>
+    <a class="btn ghost xLink" href="#" target="_blank" rel="noopener">X</a>
+    <a class="btn soon" href="#">BUY</a>
+  </div>
+</footer>
+
+<div id="rain"></div>
+<div id="win"><div class="w">
+  <img src="assets/ava.webp" alt="the dog, done for the night">
+  <h2>BLOCK CLEARED</h2>
+  <p id="winTxt">eight cars, eight wheels, zero paint. the block is registered, the tank is empty, and the sun is coming up over the charging station. same time tomorrow.</p>
+  <button class="btn" id="winClose" style="margin-top:14px">WALK AWAY</button>
+</div></div>
+
+<script>
+/* ============ SETTINGS ============ */
+window.CONTRACT = "";      /* адрес контракта */
+window.TWITTER  = "";      /* ссылка на X */
+window.BUY_URL  = "";      /* ссылка на покупку */
+/* ================================== */
+
+var CA=(window.CONTRACT||"").trim(), TW=(window.TWITTER||"").trim(), BUY=(window.BUY_URL||"").trim();
+if(CA){
+  document.querySelectorAll(".ca-val").forEach(function(e){ e.textContent=CA.slice(0,6)+"…"+CA.slice(-4); });
+  document.getElementById("caBox").addEventListener("click",function(){
+    var b=this.querySelector("b"), old=b.textContent;
+    navigator.clipboard.writeText(CA).then(function(){ b.textContent="copied"; setTimeout(function(){ b.textContent=old; },1200); });
+  });
+}
+if(TW){ document.querySelectorAll("#xBtn,.xLink").forEach(function(a){ a.href=TW; }); }
+var buy=document.getElementById("buyBtn");
+if(buy){
+  if(BUY){ buy.href=BUY; buy.target="_blank"; buy.rel="noopener"; buy.classList.remove("soon"); }
+  else{ document.querySelectorAll(".btn.soon").forEach(function(b){ b.addEventListener("click",function(e){ e.preventDefault(); }); }); }
+}
+
+/* ---------- marquee ---------- */
+(function(){
+  var lines=["WHEELS ONLY","ALARM 0 · TONIGHT","HE DOES NOT EXPLAIN HIMSELF","SECTOR 7 REGISTERED","THE HYDRANT WAS HERE FIRST",
+  "CHARGING PORT UNTOUCHED","QUIET CARS MAKE LOUD ENEMIES","411 KM OF RANGE, ONE BLADDER","NO PAINT WAS HARMED"];
+  var s=lines.map(function(l){return "<span>"+l+" ✦</span>";}).join("");
+  document.getElementById("mqin").innerHTML=s+s;
+})();
+
+/* ---------- audio ---------- */
+var AC=null, sfxOn=true, vol=1;
+function ac(){ try{ if(!AC) AC=new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==="suspended") AC.resume(); return AC; }catch(e){ return null; } }
+function tone(f1,f2,dur,type,g){
+  if(!sfxOn) return; var c=ac(); if(!c) return;
+  var o=c.createOscillator(), gg=c.createGain(), t=c.currentTime;
+  o.type=type||"sine"; o.frequency.setValueAtTime(f1,t);
+  if(f2&&f2!==f1) o.frequency.exponentialRampToValueAtTime(Math.max(20,f2),t+dur);
+  gg.gain.setValueAtTime(.0001,t); gg.gain.exponentialRampToValueAtTime((g||.06)*vol,t+.012);
+  gg.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(gg); gg.connect(c.destination); o.start(t); o.stop(t+dur+.05);
+}
+var noiseBuf=null;
+function nbuf(){
+  var c=ac(); if(!c) return null;
+  if(!noiseBuf){
+    noiseBuf=c.createBuffer(1,c.sampleRate*2,c.sampleRate);
+    var d=noiseBuf.getChannelData(0);
+    for(var i=0;i<d.length;i++) d[i]=Math.random()*2-1;
+  }
+  return noiseBuf;
+}
+function burst(dur,f,q,g){
+  if(!sfxOn) return; var c=ac(); if(!c) return;
+  var s=c.createBufferSource(); s.buffer=nbuf(); s.loop=true;
+  var bp=c.createBiquadFilter(); bp.type="bandpass"; bp.frequency.value=f||1400; bp.Q.value=q||1.2;
+  var gg=c.createGain(); var t=c.currentTime;
+  gg.gain.setValueAtTime(.0001,t); gg.gain.exponentialRampToValueAtTime((g||.08)*vol,t+.01);
+  gg.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  s.connect(bp); bp.connect(gg); gg.connect(c.destination); s.start(t); s.stop(t+dur+.05);
+}
+/* continuous stream sound */
+var ST={src:null,g:null,bp:null};
+function streamOn(){
+  if(!sfxOn) return; var c=ac(); if(!c||ST.src) return;
+  var s=c.createBufferSource(); s.buffer=nbuf(); s.loop=true;
+  var bp=c.createBiquadFilter(); bp.type="bandpass"; bp.frequency.value=900; bp.Q.value=.9;
+  var hp=c.createBiquadFilter(); hp.type="highpass"; hp.frequency.value=380;
+  var g=c.createGain(); g.gain.setValueAtTime(.0001,c.currentTime);
+  g.gain.exponentialRampToValueAtTime(.055*vol,c.currentTime+.07);
+  s.connect(hp); hp.connect(bp); bp.connect(g); g.connect(c.destination); s.start();
+  ST.src=s; ST.g=g; ST.bp=bp;
+}
+function streamOff(){
+  if(!ST.src) return; var c=ac(); var t=c?c.currentTime:0;
+  try{ ST.g.gain.exponentialRampToValueAtTime(.0001,t+.09); ST.src.stop(t+.16); }catch(e){}
+  ST.src=null; ST.g=null; ST.bp=null;
+}
+function streamMod(p){ if(ST.bp){ try{ ST.bp.frequency.setTargetAtTime(650+p*900,ac().currentTime,.05); }catch(e){} } }
+
+/* music: night EV techno, 16 steps */
+var MEL=[0,0,659.25,0,0,0,880,0,0,0,659.25,0,987.77,0,880,0];
+var BAS=[55,0,55,0,82.41,0,55,0,49,0,49,0,73.42,0,55,0];
+var STEP=.148, MU={on:false,t:null,step:0,next:0};
+function mn(f,at,dur,type,g,filt){
+  var c=ac(); if(!c||!f) return;
+  var o=c.createOscillator(), gg=c.createGain(), lp=c.createBiquadFilter();
+  lp.type="lowpass"; lp.frequency.value=filt||2200;
+  o.type=type; o.frequency.setValueAtTime(f,at);
+  gg.gain.setValueAtTime(.0001,at); gg.gain.exponentialRampToValueAtTime(g,at+.015);
+  gg.gain.exponentialRampToValueAtTime(.0001,at+dur);
+  o.connect(lp); lp.connect(gg); gg.connect(c.destination); o.start(at); o.stop(at+dur+.05);
+}
+function kick(at){
+  var c=ac(); if(!c) return;
+  var o=c.createOscillator(), g=c.createGain();
+  o.type="sine"; o.frequency.setValueAtTime(128,at); o.frequency.exponentialRampToValueAtTime(42,at+.11);
+  g.gain.setValueAtTime(.14,at); g.gain.exponentialRampToValueAtTime(.0001,at+.16);
+  o.connect(g); g.connect(c.destination); o.start(at); o.stop(at+.2);
+}
+function whine(at){
+  var c=ac(); if(!c) return;
+  var o=c.createOscillator(), g=c.createGain();
+  o.type="sawtooth"; o.frequency.setValueAtTime(420,at); o.frequency.exponentialRampToValueAtTime(2400,at+1.05);
+  g.gain.setValueAtTime(.0001,at); g.gain.exponentialRampToValueAtTime(.016,at+.3);
+  g.gain.exponentialRampToValueAtTime(.0001,at+1.15);
+  var lp=c.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=3000;
+  o.connect(lp); lp.connect(g); g.connect(c.destination); o.start(at); o.stop(at+1.2);
+}
+function musSchedule(){
+  var c=ac(); if(!c) return;
+  while(MU.next < c.currentTime+.5){
+    var i=MU.step%16, at=Math.max(MU.next,c.currentTime+.02);
+    if(i%4===0) kick(at);
+    if(MEL[i]) mn(MEL[i],at,.22,"square",.019,3000);
+    if(BAS[i]) mn(BAS[i],at,.2,"sawtooth",.05,420);
+    if(MU.step%64===0) whine(at);
+    MU.next+=STEP; MU.step++;
+  }
+}
+function musToggle(){
+  MU.on=!MU.on;
+  var b=document.getElementById("musBtn");
+  if(MU.on){ var c=ac(); if(!c){MU.on=false;return;} MU.next=c.currentTime+.1; MU.t=setInterval(musSchedule,90); b.textContent="MUSIC: ON"; b.classList.add("on"); }
+  else{ clearInterval(MU.t); MU.t=null; b.textContent="MUSIC: OFF"; b.classList.remove("on"); }
+}
+document.getElementById("musBtn").addEventListener("click",musToggle);
+document.getElementById("sfxBtn").addEventListener("click",function(){
+  sfxOn=!sfxOn; this.textContent="SOUND: "+(sfxOn?"ON":"OFF"); this.classList.toggle("on",sfxOn);
+  if(!sfxOn) streamOff();
+});
+document.getElementById("sfxBtn").classList.add("on");
+document.addEventListener("visibilitychange",function(){
+  if(document.hidden){ if(MU.t){clearInterval(MU.t);MU.t=null;} streamOff(); }
+  else if(MU.on&&!MU.t){ var c=ac(); if(c){ MU.next=c.currentTime+.1; MU.t=setInterval(musSchedule,90);} }
+});
+
+/* ---------- gate ---------- */
+var gate=document.getElementById("gate");
+function openGate(){
+  if(gate.classList.contains("off")) return;
+  gate.classList.add("off"); document.body.classList.remove("locked");
+  ac(); tone(220,660,.22,"square",.05); setTimeout(function(){ tone(660,990,.18,"square",.04); },140);
+  setTimeout(function(){ gate.style.display="none"; },520);
+  if(!MU.on) musToggle();
+}
+gate.addEventListener("click",openGate);
+setTimeout(openGate,25000);
+
+/* ---------- hero coins ---------- */
+var drop=document.getElementById("drop");
+function dropCoin(x,y){
+  var d=document.createElement("div"); d.className="coin";
+  var W=drop.clientWidth||320, H=drop.clientHeight||320;
+  if(x===undefined){ x=Math.random()*W; y=-20; }
+  d.style.left=(x-13)+"px"; d.style.top=(y-13)+"px"; drop.appendChild(d);
+  var vx=(Math.random()-.5)*7, vy=-4-Math.random()*5, n=0, rot=(Math.random()-.5)*22, px=x-13, py=y-13;
+  (function stp(){
+    n++; vy+=.42; px+=vx; py+=vy;
+    d.style.transform="translate("+(px-(x-13))+"px,"+(py-(y-13))+"px) rotate("+(n*rot)+"deg)";
+    if(n>120||py>H+320){ d.remove(); return; }
+    if(n>100) d.style.opacity=String(1-(n-100)/20);
+    requestAnimationFrame(stp);
+  })();
+}
+var pokes=0;
+document.getElementById("heroImg").addEventListener("click",function(e){
+  var r=this.getBoundingClientRect(), pr=drop.getBoundingClientRect();
+  var x=e.clientX-pr.left, y=e.clientY-pr.top;
+  for(var i=0;i<9;i++) setTimeout(function(){ dropCoin(x+(Math.random()-.5)*70,y+(Math.random()-.5)*40); },i*32);
+  burst(.18,1500+Math.random()*500,1.1,.05);
+  tone(880+Math.random()*180,1500,.1,"triangle",.05);
+  pokes++;
+  if(pokes===7){ for(var k=0;k<26;k++) setTimeout(function(){ dropCoin(); },k*55); }
+});
+/* sparks on the splash point */
+(function(){
+  var pf=document.querySelector(".pframe");
+  setInterval(function(){
+    if(document.hidden) return;
+    var s=document.createElement("div"); s.className="spark";
+    var w=pf.clientWidth, h=pf.clientHeight;
+    s.style.left=(w*0.47+Math.random()*w*0.05)+"px"; s.style.top=(h*0.80+Math.random()*h*0.04)+"px";
+    pf.appendChild(s);
+    var n=0, vx=(Math.random()-.2)*2.4, vy=-2.4-Math.random()*2;
+    s.style.opacity="1";
+    (function st(){ n++; vy+=.16; s.style.transform="translate("+(vx*n)+"px,"+(vy*n+n*n*.04)+"px)";
+      if(n>34){ s.remove(); return; } s.style.opacity=String(1-n/34); requestAnimationFrame(st); })();
+  },260);
+})();
+
+/* ---------- round book data ---------- */
+var CARS=[
+ {t:"THE ONE THAT STARTED IT",p:"white sedan, parked over the spot where the hydrant used to be, still warm from the road. it made no noise pulling in and that is exactly what bothered me. i took my time with that wheel and i have not stopped since."},
+ {t:"THE ONE WITH THE STICKER",p:"back glass covered in a sticker about saving the planet, front wheel covered in something else by the time i left. i am also doing my part for the local ecosystem, in my own way. nobody gave me a sticker for it."},
+ {t:"THE ONE THAT WAS CHARGING",p:"plugged in, humming to itself, little light blinking green like it was proud. i waited for the light to turn solid because i am not an animal. then i registered the wheel and walked off before the cable clicked."},
+ {t:"THE ONE PARKED CROOKED",p:"two spaces, both of them somebody else's, nose out like it owned the row. cars that park like that get the full tank and no negotiation. i left the bumper alone, the wheel said everything."},
+ {t:"THE ONE WITH THE CAMERA",p:"four cameras, all of them recording, and i gave each one a clean profile shot of a dog in sunglasses. the footage is out there somewhere in a phone. good luck putting a name to the face."},
+ {t:"THE ONE THAT HONKED",p:"alarm went off at the halfway point and the whole lot lit up orange. i finished anyway, on principle, then walked at normal speed around the corner. running looks guilty, walking looks like a resident."},
+ {t:"THE ONE IN THE RAIN",p:"wet night, everything already soaked, and you could argue the whole thing was pointless. it is not about the moisture, it is about the paperwork. the wheel gets filed whether the sky helps or not."},
+ {t:"THE LAST ONE ON THE BLOCK",p:"end of the row, tank nearly empty, and i had to make the last drops count. i got it done with maybe a spoon to spare. the block is registered now, and i went home before the first car started."}
+];
+(function(){
+  var g=document.getElementById("cardGrid"), b=document.getElementById("bookList");
+  CARS.forEach(function(c,i){
+    var d=document.createElement("div"); d.className="card lock"; d.setAttribute("data-n",String(i+1)); d.id="card"+i;
+    d.innerHTML='<div class="h"><div class="idx">CAR 0'+(i+1)+'</div><h3>'+c.t+'</h3><p>'+c.p+'</p></div>';
+    g.appendChild(d);
+    var li=document.createElement("li"); li.id="bk"+i;
+    li.innerHTML='<em>0'+(i+1)+'</em><span>'+(i===0?"in position":"waiting")+'</span>';
+    if(i===0) li.className="now";
+    b.appendChild(li);
+  });
+})();
+
+/* ---------- THE GAME ---------- */
+var cv=document.getElementById("game"), ctx=cv.getContext("2d");
+var W=960,H=540, GROUND=452;
+var dogeImg=new Image(); dogeImg.src="assets/doge.webp";
+
+var LV=[
+ {need:100,wheelR:36,carX:470,wind:0,  sr:1.5,col:"#f2f5f7",label:"white sedan"},
+ {need:108,wheelR:34,carX:500,wind:12, sr:1.8,col:"#e9edf0",label:"sticker sedan"},
+ {need:116,wheelR:33,carX:478,wind:-20,sr:2.0,col:"#f2f5f7",label:"charging"},
+ {need:124,wheelR:31,carX:516,wind:26, sr:2.3,col:"#d8dde1",label:"parked crooked"},
+ {need:132,wheelR:30,carX:492,wind:-30,sr:2.6,col:"#eef2f5",label:"camera car"},
+ {need:140,wheelR:29,carX:522,wind:36, sr:3.0,col:"#c9ced2",label:"loud one"},
+ {need:148,wheelR:28,carX:504,wind:-40,sr:3.3,col:"#e6eaee",label:"rain car"},
+ {need:158,wheelR:27,carX:528,wind:44, sr:3.8,col:"#f2f5f7",label:"last one"}
+];
+
+var G={
+  run:false, lvl:0, fill:0, sentry:0, bl:100, hold:false,
+  aim:{x:620,y:400}, parts:[], pud:[], spr:[], carX:0, carV:0, carState:"in",
+  t:0, last:0, done:0, drinkCd:0, shake:0, flash:0, msgT:0
+};
+
+function resizeCv(){
+  var r=cv.getBoundingClientRect(), dpr=Math.min(2,window.devicePixelRatio||1);
+  cv.width=Math.round(r.width*dpr); cv.height=Math.round(r.width*dpr*(H/W));
+  ctx.setTransform(cv.width/W,0,0,cv.width/W,0,0);
+}
+window.addEventListener("resize",resizeCv);
+
+function pos(e){
+  var r=cv.getBoundingClientRect();
+  var cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+  var cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top;
+  return {x:cx*(W/r.width), y:cy*(W/r.width)};
+}
+function setAim(e){ var p=pos(e); G.aim.x=p.x; G.aim.y=p.y; }
+cv.addEventListener("mousemove",setAim);
+cv.addEventListener("mousedown",function(e){ e.preventDefault(); setAim(e); holdOn(); });
+window.addEventListener("mouseup",holdOff);
+cv.addEventListener("touchstart",function(e){ e.preventDefault(); setAim(e); holdOn(); },{passive:false});
+cv.addEventListener("touchmove",function(e){ e.preventDefault(); setAim(e); },{passive:false});
+window.addEventListener("touchend",holdOff);
+window.addEventListener("keydown",function(e){
+  if(e.code==="Space"){ e.preventDefault(); holdOn(); }
+  if(e.key==="r"||e.key==="R") drink();
+});
+window.addEventListener("keyup",function(e){ if(e.code==="Space") holdOff(); });
+
+function holdOn(){ if(!G.run||G.carState!=="park") return; if(G.bl<=0){ msg("TANK EMPTY"); return; } G.hold=true; streamOn(); }
+function holdOff(){ if(!G.hold) return; G.hold=false; streamOff(); }
+
+function msg(s,ms){
+  var m=document.getElementById("gmsg"); m.textContent=s; m.classList.add("on");
+  G.msgT=(ms||1100);
+}
+function startGame(){
+  document.getElementById("gstart").classList.add("off");
+  G.run=true; G.lvl=0; G.done=0; G.bl=100; G.parts=[]; G.pud=[]; G.spr=[];
+  loadLevel(0); ac(); if(!MU.on) musToggle();
+  markBook();
+}
+document.getElementById("startBtn").addEventListener("click",startGame);
+document.getElementById("resetBtn").addEventListener("click",function(){
+  document.getElementById("gstart").classList.remove("off"); G.run=false; holdOff();
+  G.lvl=0; G.done=0; G.fill=0; G.sentry=0; G.bl=100; G.parts=[]; G.pud=[]; G.spr=[];
+  document.querySelectorAll(".card").forEach(function(c){ c.classList.add("lock"); c.classList.remove("open"); });
+  document.getElementById("chipCars").textContent="0";
+  markBook(); hud();
+});
+document.getElementById("drinkBtn").addEventListener("click",drink);
+function drink(){
+  if(!G.run||G.drinkCd>0) return;
+  G.bl=Math.min(100,G.bl+45); G.drinkCd=4;
+  burst(.3,520,.7,.06); tone(180,320,.22,"sine",.05);
+  msg("GLUG",700); hud();
+}
+
+function loadLevel(i){
+  var L=LV[i];
+  G.fill=0; G.sentry=0; G.carX=W+220; G.carV=-560; G.carState="in"; G.parts=[]; G.spr=[];
+  document.getElementById("windTxt").textContent="WIND "+(L.wind>0?"→ ":L.wind<0?"← ":"")+Math.abs(L.wind)+" km/h";
+  hud(); markBook();
+}
+function markBook(){
+  for(var i=0;i<8;i++){
+    var li=document.getElementById("bk"+i); if(!li) continue;
+    li.className = i<G.done ? "done" : (i===G.lvl&&G.run ? "now" : "");
+    li.querySelector("span").textContent = i<G.done ? "marked" : (i===G.lvl&&G.run ? "in position" : "waiting");
+  }
+  document.getElementById("bookCount").textContent=G.done+"/8";
+}
+function hud(){
+  document.getElementById("vB").textContent=Math.round(G.bl)+"%";
+  document.querySelector("#bBladder i").style.width=Math.max(0,G.bl)+"%";
+  var L=LV[Math.min(G.lvl,7)];
+  var fp=Math.min(100,Math.round(G.fill/L.need*100));
+  document.getElementById("vF").textContent=fp+"%";
+  document.querySelector("#bFill i").style.width=fp+"%";
+  document.getElementById("vS").textContent=Math.round(G.sentry)+"%";
+  document.querySelector("#bSentry i").style.width=Math.min(100,G.sentry)+"%";
+  var db=document.getElementById("drinkBtn");
+  db.disabled=(G.drinkCd>0); db.textContent=G.drinkCd>0?("DRINK "+G.drinkCd.toFixed(1)+"s"):"DRINK +45";
+}
+
+/* car geometry helpers, car drawn nose-left */
+function carBox(){
+  var L=LV[Math.min(G.lvl,7)], x=G.carX, bx=x+82+L.wheelR+14;
+  return {x:x, y:GROUND-120, w:390, h:120,
+    wheel:{x:x+82, y:GROUND-30, r:L.wheelR},
+    body:{x:bx, y:GROUND-120, w:(x+384)-bx, h:94}};
+}
+
+function solveVel(o,aim){
+  var dx=aim.x-o.x, dy=aim.y-o.y, d=Math.hypot(dx,dy);
+  var T=Math.max(.3, Math.min(1.5, d/560+.2));
+  var vx=dx/T, vy=(dy-.5*1500*T*T)/T;
+  return {vx:vx,vy:vy};
+}
+function emit(dt){
+  var L=LV[Math.min(G.lvl,7)];
+  var o=originPoint();
+  var v=solveVel(o,G.aim);
+  var n=3;
+  for(var i=0;i<n;i++){
+    G.parts.push({
+      x:o.x+(Math.random()-.5)*4, y:o.y+(Math.random()-.5)*4,
+      vx:v.vx+(Math.random()-.5)*16, vy:v.vy+(Math.random()-.5)*16,
+      r:2.2+Math.random()*2.4, life:0
+    });
+  }
+  G.bl-=19*dt; if(G.bl<=0){ G.bl=0; holdOff(); msg("TANK EMPTY · PRESS DRINK"); }
+  streamMod(Math.min(1,G.fill/L.need));
+}
+function originPoint(){
+  var h=250, w=h*(586/691);
+  var x=70, y=GROUND-h;
+  return {x:x+w*0.90, y:y+h*0.60};
+}
+function splash(x,y,c,n){
+  for(var i=0;i<(n||7);i++){
+    G.spr.push({x:x,y:y,vx:(Math.random()-.5)*220,vy:-Math.random()*190,r:1.6+Math.random()*2,life:0,c:c});
+  }
+}
+function step(dt){
+  var L=LV[Math.min(G.lvl,7)];
+  /* car movement */
+  if(G.carState==="in"){
+    G.carX+=G.carV*dt;
+    if(G.carX<=L.carX){ G.carX=L.carX; G.carState="park"; G.carV=0; msg("TARGET IN POSITION",900); tone(520,780,.1,"square",.04); }
+  } else if(G.carState==="out"){
+    G.carV=Math.min(900,G.carV+700*dt); G.carX-=G.carV*dt;
+    if(G.carX<-460){
+      if(G.lvl>=8){ return; }
+      loadLevel(G.lvl);
+    }
+  }
+  if(G.hold&&G.bl>0&&G.carState==="park"&&G.lvl<8) emit(dt);
+  if(G.drinkCd>0){ G.drinkCd=Math.max(0,G.drinkCd-dt); }
+  if(!G.hold&&G.sentry>0) G.sentry=Math.max(0,G.sentry-14*dt);
+
+  var box=carBox();
+  /* particles */
+  for(var i=G.parts.length-1;i>=0;i--){
+    var p=G.parts[i];
+    p.vy+=1500*dt; p.vx+=(L.wind*2.4)*dt; p.x+=p.vx*dt; p.y+=p.vy*dt; p.life+=dt;
+    var hitWheel = Math.hypot(p.x-box.wheel.x,p.y-box.wheel.y) < box.wheel.r+3;
+    var hitBody = (p.x>box.body.x&&p.x<box.body.x+box.body.w&&p.y>box.body.y&&p.y<box.body.y+box.body.h);
+    if(G.carState==="park"&&hitWheel){
+      G.fill+=1.9; splash(p.x,p.y,"#ffd21e",3); G.parts.splice(i,1);
+      if(Math.random()<.08) burst(.06,2200,1.6,.02);
+      if(G.fill>=L.need){ winCar(); }
+      continue;
+    }
+    if(G.carState==="park"&&hitBody){
+      G.sentry+=L.sr*1.6; splash(p.x,p.y,"#dfe6ea",3); G.parts.splice(i,1);
+      if(G.sentry>=100){ spook(); }
+      continue;
+    }
+    if(p.y>GROUND){
+      G.pud.push({x:p.x,y:GROUND+Math.random()*4,r:3+Math.random()*7,a:.5});
+      if(G.pud.length>90) G.pud.shift();
+      G.parts.splice(i,1); continue;
+    }
+    if(p.x>W+60||p.x<-60||p.life>4) G.parts.splice(i,1);
+  }
+  for(var j=G.spr.length-1;j>=0;j--){
+    var s=G.spr[j]; s.vy+=1400*dt; s.x+=s.vx*dt; s.y+=s.vy*dt; s.life+=dt;
+    if(s.life>.7) G.spr.splice(j,1);
+  }
+  if(G.shake>0) G.shake=Math.max(0,G.shake-dt*3);
+  if(G.flash>0) G.flash=Math.max(0,G.flash-dt*2.2);
+  if(G.msgT>0){ G.msgT-=dt*1000; if(G.msgT<=0) document.getElementById("gmsg").classList.remove("on"); }
+  hud();
+}
+function winCar(){
+  if(G.carState!=="park") return;
+  holdOff();
+  G.carState="out"; G.carV=0; G.flash=1;
+  G.done++; G.lvl++;
+  var idx=G.done-1;
+  var c=document.getElementById("card"+idx);
+  if(c){ c.classList.remove("lock"); c.classList.add("open"); }
+  document.getElementById("chipCars").textContent=String(G.done);
+  tone(660,990,.12,"triangle",.06); setTimeout(function(){ tone(990,1320,.16,"triangle",.05); },110);
+  for(var i=0;i<10;i++) setTimeout(function(){ dropCoin(); },i*40);
+  markBook();
+  if(G.done>=8){ msg("BLOCK CLEARED",1600); setTimeout(winAll,1200); }
+  else msg("MARKED · CAR "+G.done+"/8",1300);
+}
+function spook(){
+  holdOff();
+  G.carState="out"; G.carV=0; G.sentry=100; G.shake=1;
+  msg("ALARM · IT LEFT",1400);
+  tone(440,440,.16,"square",.08); setTimeout(function(){ tone(330,330,.2,"square",.08); },170);
+  setTimeout(function(){ tone(440,440,.16,"square",.07); },380);
+}
+function winAll(){
+  document.getElementById("win").classList.add("on");
+  var r=document.getElementById("rain");
+  var n=0, iv=setInterval(function(){
+    var d=document.createElement("div"); d.className="coin";
+    d.style.left=(Math.random()*100)+"vw"; d.style.top="-30px";
+    r.appendChild(d);
+    var y=-30, v=2+Math.random()*4, rot=(Math.random()-.5)*18, k=0;
+    (function st(){ k++; v+=.24; y+=v; d.style.transform="translateY("+y+"px) rotate("+(k*rot)+"deg)";
+      if(y>window.innerHeight+80){ d.remove(); return; } requestAnimationFrame(st); })();
+    n++; if(n>90) clearInterval(iv);
+  },70);
+  tone(523,1046,.5,"triangle",.06);
+}
+document.getElementById("winClose").addEventListener("click",function(){
+  document.getElementById("win").classList.remove("on");
+  document.getElementById("rain").innerHTML="";
+});
+
+/* ---------- drawing ---------- */
+function drawCar(x){
+  var L=LV[Math.min(G.lvl,7)];
+  var y=GROUND, w=390, h=120;
+  ctx.save();
+  /* shadow */
+  ctx.fillStyle="rgba(0,0,0,.45)";
+  ctx.beginPath(); ctx.ellipse(x+w/2,y+6,w/2.1,11,0,0,7); ctx.fill();
+  /* body */
+  ctx.fillStyle=L.col; ctx.strokeStyle="#0a0b0c"; ctx.lineWidth=4;
+  ctx.beginPath();
+  ctx.moveTo(x+6,y-34);
+  ctx.quadraticCurveTo(x+2,y-62, x+44,y-70);
+  ctx.quadraticCurveTo(x+96,y-122, x+206,y-124);
+  ctx.quadraticCurveTo(x+300,y-122, x+338,y-72);
+  ctx.quadraticCurveTo(x+384,y-64, x+386,y-32);
+  ctx.quadraticCurveTo(x+386,y-14, x+366,y-14);
+  ctx.lineTo(x+26,y-14);
+  ctx.quadraticCurveTo(x+6,y-14, x+6,y-34);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  /* windows */
+  ctx.fillStyle="#20262b";
+  ctx.beginPath();
+  ctx.moveTo(x+70,y-72); ctx.quadraticCurveTo(x+112,y-112, x+198,y-114);
+  ctx.lineTo(x+198,y-72); ctx.closePath(); ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(x+210,y-114); ctx.quadraticCurveTo(x+288,y-112, x+322,y-74);
+  ctx.lineTo(x+210,y-72); ctx.closePath(); ctx.fill();
+  /* light */
+  ctx.fillStyle= G.flash>0 ? "#fff2a8" : "#cfd6db";
+  ctx.beginPath(); ctx.ellipse(x+34,y-52,20,7,-.2,0,7); ctx.fill();
+  ctx.strokeStyle="#0a0b0c"; ctx.lineWidth=2.4; ctx.stroke();
+  /* camera dot */
+  ctx.fillStyle=(Math.sin(G.t*4)>0)?"#ff4b3e":"#5d2521";
+  ctx.beginPath(); ctx.arc(x+206,y-108,3.4,0,7); ctx.fill();
+  /* wheels */
+  var wl=[{x:x+82,r:L.wheelR},{x:x+300,r:L.wheelR}];
+  for(var i=0;i<2;i++){
+    ctx.fillStyle="#111517"; ctx.beginPath(); ctx.arc(wl[i].x,y-30,wl[i].r+6,0,7); ctx.fill();
+    ctx.fillStyle="#2c3237"; ctx.beginPath(); ctx.arc(wl[i].x,y-30,wl[i].r-3,0,7); ctx.fill();
+    ctx.strokeStyle="#171b1e"; ctx.lineWidth=3;
+    for(var k=0;k<5;k++){
+      var a=k/5*6.283+G.t*.2;
+      ctx.beginPath(); ctx.moveTo(wl[i].x,y-30);
+      ctx.lineTo(wl[i].x+Math.cos(a)*(wl[i].r-5),y-30+Math.sin(a)*(wl[i].r-5)); ctx.stroke();
+    }
+  }
+  /* target ring on front wheel */
+  if(G.carState==="park"){
+    var L2=LV[Math.min(G.lvl,7)], p=Math.min(1,G.fill/L2.need);
+    ctx.strokeStyle="rgba(139,250,54,.85)"; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.arc(x+82,y-30,L2.wheelR+11,-1.57,-1.57+6.283*p); ctx.stroke();
+    ctx.strokeStyle="rgba(255,255,255,.14)"; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.arc(x+82,y-30,L2.wheelR+11,0,6.283); ctx.stroke();
+  }
+  /* danger zone warning when the aim drifts onto the paint */
+  if(G.carState==="park"){
+    var bb=carBox();
+    if(G.aim.x>bb.body.x-6&&G.aim.x<bb.body.x+bb.body.w&&G.aim.y<GROUND-18){
+      ctx.save(); ctx.strokeStyle="rgba(255,75,62,.75)"; ctx.setLineDash([7,6]); ctx.lineWidth=2;
+      ctx.strokeRect(bb.body.x,bb.body.y,bb.body.w,bb.body.h);
+      ctx.setLineDash([]); ctx.fillStyle="rgba(255,75,62,.85)";
+      ctx.font="13px 'IBM Plex Mono',monospace"; ctx.textAlign="left";
+      ctx.fillText("PAINT · ALARM",bb.body.x+8,bb.body.y-8); ctx.restore();
+    }
+  }
+  /* wetness */
+  if(G.fill>0&&G.carState!=="in"){
+    ctx.save(); ctx.globalAlpha=Math.min(.75,G.fill/(LV[Math.min(G.lvl,7)].need)*0.9);
+    ctx.fillStyle="#ffd21e";
+    ctx.beginPath(); ctx.ellipse(x+82,y-16,L.wheelR+8,10,0,0,7); ctx.fill();
+    ctx.globalAlpha*=.55;
+    ctx.beginPath(); ctx.arc(x+82,y-30,L.wheelR-4,.4,2.75); ctx.fill();
+    ctx.restore();
+  }
+  ctx.restore();
+}
+function drawDoge(){
+  var h=250, w=h*(586/691), x=70, y=GROUND-h;
+  ctx.save();
+  ctx.fillStyle="rgba(0,0,0,.4)";
+  ctx.beginPath(); ctx.ellipse(x+w/2,GROUND+4,w/2.4,9,0,0,7); ctx.fill();
+  var wob=G.hold?Math.sin(G.t*22)*1.6:Math.sin(G.t*1.6)*1.2;
+  ctx.translate(x+w/2,GROUND); ctx.rotate(wob*Math.PI/180); ctx.translate(-(x+w/2),-GROUND);
+  if(dogeImg.complete&&dogeImg.naturalWidth) ctx.drawImage(dogeImg,x,y,w,h);
+  ctx.restore();
+}
+function drawScene(){
+  ctx.clearRect(0,0,W,H);
+  var sx=(G.shake>0)?(Math.random()-.5)*10*G.shake:0;
+  var sy=(G.shake>0)?(Math.random()-.5)*8*G.shake:0;
+  ctx.save(); ctx.translate(sx,sy);
+  /* sky */
+  var g=ctx.createLinearGradient(0,0,0,GROUND);
+  g.addColorStop(0,"#0b1116"); g.addColorStop(1,"#152028");
+  ctx.fillStyle=g; ctx.fillRect(-20,-20,W+40,GROUND+20);
+  /* stars */
+  ctx.fillStyle="rgba(255,255,255,.35)";
+  for(var i=0;i<34;i++){
+    var px=(i*137.5)%W, py=(i*53)%240;
+    ctx.fillRect(px,py*0.8+12,1.6,1.6);
+  }
+  /* far wall */
+  ctx.fillStyle="#0d141a"; ctx.fillRect(-20,GROUND-104,W+40,104);
+  ctx.strokeStyle="#182129"; ctx.lineWidth=2;
+  for(var q=0;q<12;q++){ ctx.beginPath(); ctx.moveTo(q*84,GROUND-104); ctx.lineTo(q*84,GROUND); ctx.stroke(); }
+  /* charging posts in front of the wall */
+  for(var k=0;k<4;k++){
+    var bx=36+k*252;
+    ctx.fillStyle="#151c22"; ctx.fillRect(bx,GROUND-150,18,150);
+    ctx.fillStyle="#1c252c"; ctx.fillRect(bx-9,GROUND-188,36,40);
+    ctx.strokeStyle="#101619"; ctx.lineWidth=2; ctx.strokeRect(bx-9,GROUND-188,36,40);
+    ctx.fillStyle=(Math.sin(G.t*2.2+k)>0)?"#3f8f22":"#1a3520";
+    ctx.fillRect(bx-3,GROUND-178,26,7);
+    ctx.strokeStyle="#1a2329"; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(bx+18,GROUND-146);
+    ctx.quadraticCurveTo(bx+52,GROUND-104,bx+30,GROUND-16); ctx.stroke();
+  }
+  /* asphalt */
+  var ag=ctx.createLinearGradient(0,GROUND,0,H);
+  ag.addColorStop(0,"#22282c"); ag.addColorStop(1,"#12171a");
+  ctx.fillStyle=ag; ctx.fillRect(-20,GROUND,W+40,H-GROUND+20);
+  ctx.strokeStyle="#39424a"; ctx.lineWidth=3;
+  ctx.beginPath(); ctx.moveTo(-20,GROUND); ctx.lineTo(W+20,GROUND); ctx.stroke();
+  /* parking stripes */
+  ctx.strokeStyle="rgba(255,210,30,.24)"; ctx.lineWidth=5;
+  for(var s=0;s<7;s++){
+    ctx.beginPath(); ctx.moveTo(s*170-40,H); ctx.lineTo(s*170+60,GROUND+8); ctx.stroke();
+  }
+  /* puddles */
+  for(var p=0;p<G.pud.length;p++){
+    var pu=G.pud[p];
+    ctx.fillStyle="rgba(255,210,30,"+(0.14+pu.a*0.16)+")";
+    ctx.beginPath(); ctx.ellipse(pu.x,pu.y,pu.r*1.9,pu.r*.5,0,0,7); ctx.fill();
+  }
+  drawCar(G.carX);
+  drawDoge();
+  /* stream */
+  ctx.save();
+  for(var i2=0;i2<G.parts.length;i2++){
+    var pa=G.parts[i2];
+    ctx.fillStyle="#ffe873";
+    ctx.beginPath(); ctx.ellipse(pa.x,pa.y,pa.r*1.5,pa.r*2.2,Math.atan2(pa.vy,pa.vx)+1.57,0,7); ctx.fill();
+  }
+  ctx.restore();
+  for(var j=0;j<G.spr.length;j++){
+    var sp=G.spr[j];
+    ctx.globalAlpha=Math.max(0,1-sp.life/.7);
+    ctx.fillStyle=sp.c; ctx.beginPath(); ctx.arc(sp.x,sp.y,sp.r,0,7); ctx.fill();
+    ctx.globalAlpha=1;
+  }
+  /* aim crosshair */
+  if(G.run&&G.carState==="park"){
+    ctx.strokeStyle=G.hold?"rgba(255,210,30,.9)":"rgba(255,255,255,.35)"; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(G.aim.x,G.aim.y,13,0,7); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(G.aim.x-20,G.aim.y); ctx.lineTo(G.aim.x-17,G.aim.y);
+    ctx.moveTo(G.aim.x+17,G.aim.y); ctx.lineTo(G.aim.x+20,G.aim.y); ctx.stroke();
+    /* short trajectory hint — direction only, not the landing spot */
+    var o=originPoint(), sv=solveVel(o,G.aim);
+    var vx=sv.vx, vy=sv.vy, px=o.x, py=o.y;
+    ctx.strokeStyle="rgba(255,255,255,.16)"; ctx.setLineDash([4,7]); ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(px,py);
+    for(var t2=0;t2<16;t2++){
+      vy+=1500*.016; vx+=LV[Math.min(G.lvl,7)].wind*2.4*.016; px+=vx*.016; py+=vy*.016;
+      if(py>GROUND) break; ctx.lineTo(px,py);
+    }
+    ctx.stroke(); ctx.setLineDash([]);
+  }
+  /* wind arrow */
+  var L3=LV[Math.min(G.lvl,7)];
+  if(G.run&&L3.wind){
+    ctx.strokeStyle="rgba(139,250,54,.55)"; ctx.lineWidth=2.4;
+    var wy=90, dir=L3.wind>0?1:-1, len=Math.min(70,Math.abs(L3.wind)*1.4);
+    ctx.beginPath(); ctx.moveTo(W/2-dir*len/2,wy); ctx.lineTo(W/2+dir*len/2,wy);
+    ctx.lineTo(W/2+dir*len/2-dir*10,wy-7); ctx.moveTo(W/2+dir*len/2,wy); ctx.lineTo(W/2+dir*len/2-dir*10,wy+7);
+    ctx.stroke();
+    ctx.fillStyle="rgba(139,250,54,.7)"; ctx.font="14px 'IBM Plex Mono',monospace";
+    ctx.textAlign="center"; ctx.fillText("WIND "+Math.abs(L3.wind),W/2,wy-18);
+  }
+  /* alarm flash */
+  if(G.sentry>60&&G.carState==="park"){
+    ctx.fillStyle="rgba(255,75,62,"+(0.05+0.09*Math.abs(Math.sin(G.t*9)))+")";
+    ctx.fillRect(-20,-20,W+40,H+40);
+  }
+  ctx.restore();
+}
+function loop(ts){
+  if(!G.last) G.last=ts;
+  var dt=Math.min(.05,(ts-G.last)/1000); G.last=ts; G.t+=dt;
+  if(G.run) step(dt);
+  drawScene();
+  requestAnimationFrame(loop);
+}
+dogeImg.onload=function(){ resizeCv(); };
+resizeCv(); hud(); requestAnimationFrame(loop);
+
+/* clock */
+setInterval(function(){
+  var c=document.getElementById("clock");
+  var m=12+Math.floor(Date.now()/60000)%40;
+  c.textContent="04:"+String(m).padStart(2,"0");
+},9000);
+</script>
+</body>
+</html>
