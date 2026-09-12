@@ -14,17 +14,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Chakra+Petch:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0b0c0e; --panel:#141719; --panel2:#1b1f22; --line:#2b3136;
-  --ink:#0a0b0c; --text:#e6eaed; --dim:#8d979e;
-  --piss:#ffd21e; --piss2:#ffe873; --acid:#8bfa36; --red:#ff4b3e;
+  --lime:#8ff33a; --lime2:#b6ff6e; --lime3:#6cd41b;
+  --cream:#fffdf2; --cream2:#fff3c4;
+  --ink:#12140a; --line:#12140a;
+  --text:#12140a; --dim:#55603a;
+  --piss:#ffd21e; --piss2:#ffe873; --acid:#3f9b0d; --red:#e6332a;
+  --screen:#101a12;
   --rad:14px;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
-  background:var(--bg); color:var(--text);
+  background:var(--lime); color:var(--text);
   font-family:"Chakra Petch",system-ui,sans-serif;
   overflow-x:clip; -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(900px 520px at 82% 2%,rgba(255,232,115,.85),transparent 62%),
+    radial-gradient(760px 460px at 6% 14%,rgba(182,255,110,.9),transparent 64%),
+    linear-gradient(180deg,#9ff646 0%,#8ff33a 42%,#7fe62f 100%);
+  background-attachment:fixed;
 }
 body.locked{overflow:hidden;height:100vh}
 img{display:block;max-width:100%}
@@ -34,196 +42,208 @@ a{color:inherit}
 
 /* ---------- films ---------- */
 .film{position:fixed;inset:0;pointer-events:none;z-index:90}
-.scan{background:repeating-linear-gradient(rgba(0,0,0,.26) 0 1px,transparent 1px 4px);opacity:.5}
-.grain{background-image:radial-gradient(rgba(255,255,255,.55) .5px,transparent .6px);background-size:3px 3px;mix-blend-mode:overlay;opacity:.09}
-.vig{background:radial-gradient(ellipse at 50% 42%,#0000 48%,rgba(0,0,0,.72) 100%)}
+.scan{background-image:radial-gradient(rgba(18,20,10,.5) .8px,transparent .9px);background-size:5px 5px;opacity:.13}
+.grain{background-image:radial-gradient(rgba(255,255,255,.7) .5px,transparent .6px);background-size:3px 3px;mix-blend-mode:overlay;opacity:.12}
+.vig{background:radial-gradient(ellipse at 50% 40%,#0000 56%,rgba(60,110,10,.22) 100%)}
 
 /* ---------- gate ---------- */
-#gate{position:fixed;inset:0;z-index:200;background:
-  radial-gradient(ellipse at 50% 40%,#1b2a12 0%,#07080a 62%);
+#gate{position:fixed;inset:0;z-index:200;
+  background:radial-gradient(ellipse at 50% 38%,#c8ff86 0%,#8ff33a 46%,#63c916 100%);
   display:flex;align-items:center;justify-content:center;cursor:pointer;text-align:center;padding:20px}
-#gate .card{max-width:560px}
-#gate .badge{font-size:12px;letter-spacing:.34em;color:var(--acid);margin-bottom:18px}
-#gate h1{font-family:"Archivo Black",sans-serif;font-size:clamp(46px,12vw,110px);margin:0;letter-spacing:.06em;
-  color:#fff;text-shadow:0 0 40px rgba(255,210,30,.35)}
-#gate p{color:var(--dim);font-size:15px;line-height:1.6;margin:16px auto 26px;max-width:430px}
-#gate .key{display:inline-flex;align-items:center;gap:12px;border:1px solid var(--line);background:#11151888;
-  padding:14px 26px;border-radius:999px;font-size:13px;letter-spacing:.24em;color:var(--text)}
-#gate .key b{width:9px;height:9px;border-radius:50%;background:var(--piss);box-shadow:0 0 14px var(--piss);animation:blink 1.3s infinite}
+#gate .card{max-width:600px}
+#gate .badge{display:inline-block;font-size:12px;letter-spacing:.3em;color:var(--piss);background:var(--ink);
+  padding:8px 15px;border-radius:999px;margin-bottom:20px}
+#gate h1{font-family:"Archivo Black",sans-serif;font-size:clamp(48px,13vw,124px);margin:0;letter-spacing:.04em;
+  background:linear-gradient(#fffdf2 32%,#ffe873 62%,#f0ad00 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  -webkit-text-stroke:4px var(--ink);paint-order:stroke fill;
+  filter:drop-shadow(0 7px 0 #d18f00) drop-shadow(0 13px 0 #12140a)}
+#gate p{color:#20300c;font-size:15.5px;line-height:1.6;margin:18px auto 26px;max-width:440px;font-weight:600}
+#gate .key{display:inline-flex;align-items:center;gap:12px;border:3px solid var(--ink);background:var(--cream);
+  padding:13px 26px;border-radius:999px;font-size:13px;letter-spacing:.2em;color:var(--ink);font-weight:700;
+  box-shadow:0 5px 0 var(--ink)}
+#gate .key b{width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px rgba(230,51,42,.25);animation:blink 1.3s infinite}
 @keyframes blink{50%{opacity:.15}}
 #gate.off{opacity:0;pointer-events:none;transition:opacity .5s}
 
 /* ---------- top bar ---------- */
-.topbar{position:sticky;top:0;z-index:80;background:rgba(10,11,13,.86);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+.topbar{position:sticky;top:0;z-index:80;background:var(--cream);border-bottom:3px solid var(--ink)}
 .topbar .in{display:flex;align-items:center;gap:12px;padding:9px 0;width:min(1180px,100% - 34px);margin-inline:auto}
-.logo{font-family:"Archivo Black",sans-serif;letter-spacing:.16em;font-size:17px}
-.logo span{color:var(--piss)}
+.logo{font-family:"Archivo Black",sans-serif;letter-spacing:.16em;font-size:18px}
+.logo span{color:#e0a800;-webkit-text-stroke:.6px var(--ink)}
 .tb-sp{flex:1}
-.tb-btn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:999px;
-  padding:7px 13px;font:600 11px/1 "Chakra Petch",sans-serif;letter-spacing:.13em;cursor:pointer}
-.tb-btn:hover{border-color:var(--piss);color:var(--piss)}
-.tb-btn.on{color:var(--acid);border-color:#3e6b22}
+.tb-btn{border:2px solid var(--ink);background:#fff;color:var(--ink);border-radius:999px;
+  padding:7px 13px;font:700 11px/1 "Chakra Petch",sans-serif;letter-spacing:.13em;cursor:pointer;
+  box-shadow:0 3px 0 var(--ink);text-decoration:none}
+.tb-btn:hover{background:var(--piss)}
+.tb-btn.on{background:var(--piss)}
 
 /* ---------- marquee ---------- */
-.mq{background:var(--piss);color:#141000;overflow:hidden;white-space:nowrap;border-bottom:2px solid #000}
-.mq div{display:inline-block;padding:6px 0;animation:mq 34s linear infinite;font-weight:700;letter-spacing:.13em;font-size:12px}
+.mq{background:var(--ink);color:var(--piss);overflow:hidden;white-space:nowrap;border-bottom:3px solid var(--ink)}
+.mq div{display:inline-block;padding:7px 0;animation:mq 34s linear infinite;font-weight:700;letter-spacing:.13em;font-size:12px}
 .mq span{padding:0 22px}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ---------- hero ---------- */
-.hero{position:relative;padding:26px 0 40px;
-  background:
-   radial-gradient(1100px 420px at 78% 34%,rgba(139,250,54,.10),transparent 70%),
-   radial-gradient(700px 400px at 12% 20%,rgba(255,210,30,.08),transparent 70%)}
+.hero{position:relative;padding:26px 0 40px}
 .hero-in{display:grid;grid-template-columns:1.02fr .98fr;gap:26px;align-items:center}
-.kicker{font-size:11px;letter-spacing:.34em;color:var(--acid);margin-bottom:12px}
-.mark{font-family:"Archivo Black",sans-serif;font-size:clamp(52px,9.2vw,106px);line-height:.86;margin:0;letter-spacing:.02em;
-  background:linear-gradient(#ffffff 30%,#ffe873 60%,#e8a800 100%);
+.kicker{display:inline-block;font-size:11px;letter-spacing:.3em;color:var(--cream);background:var(--ink);
+  padding:7px 12px;border-radius:7px;margin-bottom:14px;font-weight:700}
+.mark{font-family:"Archivo Black",sans-serif;font-size:clamp(52px,9.2vw,108px);line-height:.86;margin:0;letter-spacing:.02em;
+  background:linear-gradient(#fffdf2 30%,#ffe873 58%,#f0ad00 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  -webkit-text-stroke:3px #000;paint-order:stroke fill;
-  filter:drop-shadow(0 6px 0 #7a5a00) drop-shadow(0 12px 0 #3a2b00) drop-shadow(0 20px 28px rgba(255,210,30,.22))}
-.tick{display:inline-block;margin-top:10px;font:600 13px/1 "IBM Plex Mono",monospace;letter-spacing:.2em;
-  color:#141000;background:var(--piss);padding:6px 12px;border-radius:6px;transform:rotate(-1.4deg)}
-.slog{font-size:clamp(17px,2.1vw,23px);font-weight:700;margin:14px 0 10px;line-height:1.28}
-.lore{color:#b9c3c9;font-size:15px;line-height:1.66;margin:0 0 12px;max-width:56ch}
+  -webkit-text-stroke:4px var(--ink);paint-order:stroke fill;
+  filter:drop-shadow(0 7px 0 #d18f00) drop-shadow(0 14px 0 #12140a)}
+.tick{display:inline-block;margin-top:12px;font:700 13px/1 "IBM Plex Mono",monospace;letter-spacing:.2em;
+  color:var(--ink);background:var(--piss);padding:7px 13px;border-radius:7px;transform:rotate(-1.4deg);
+  border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
+.slog{font-size:clamp(17px,2.1vw,23px);font-weight:700;margin:16px 0 10px;line-height:1.3;color:var(--ink)}
+.lore{color:#23310d;font-size:15px;line-height:1.64;margin:0 0 12px;max-width:56ch;font-weight:500}
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
-.btn{display:inline-flex;align-items:center;gap:9px;border:2px solid #000;border-radius:11px;padding:13px 20px;
+.btn{display:inline-flex;align-items:center;gap:9px;border:3px solid var(--ink);border-radius:12px;padding:13px 20px;
   font:700 14px/1 "Chakra Petch",sans-serif;letter-spacing:.1em;text-decoration:none;cursor:pointer;
-  background:var(--piss);color:#141000;box-shadow:0 5px 0 #000;transition:transform .08s,box-shadow .08s}
-.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #000}
-.btn.ghost{background:var(--panel);color:var(--text);border-color:var(--line);box-shadow:0 5px 0 #000}
-.btn.acid{background:var(--acid);color:#0d1a04}
-.btn.soon{filter:grayscale(1) brightness(.72);cursor:not-allowed}
+  background:var(--piss);color:var(--ink);box-shadow:0 5px 0 var(--ink);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.btn.ghost{background:var(--cream)}
+.btn.acid{background:#c6ff7a}
+.btn.soon{background:#dcd9cb;color:#6d6a5c;cursor:not-allowed}
 .btn.soon::after{content:"soon";font-size:10px;opacity:.8;letter-spacing:.16em}
-#caBox{display:inline-flex;align-items:center;gap:10px;margin-top:16px;border:1px dashed #3a4248;border-radius:10px;
-  padding:9px 13px;font:400 12px/1 "IBM Plex Mono",monospace;color:var(--dim);cursor:pointer;background:#10141688}
-#caBox b{color:var(--piss);font-weight:600}
+#caBox{display:inline-flex;align-items:center;gap:10px;margin-top:16px;border:2px dashed var(--ink);border-radius:10px;
+  padding:9px 13px;font:600 12px/1 "IBM Plex Mono",monospace;color:#33420f;cursor:pointer;background:rgba(255,253,242,.7)}
+#caBox b{color:#a97700;font-weight:700}
 
 .portrait{position:relative}
-.pframe{position:relative;border:1px solid var(--line);border-radius:20px;overflow:hidden;
-  background:
-   linear-gradient(#171b1e,#0e1113);
-  box-shadow:0 30px 70px rgba(0,0,0,.6), inset 0 0 0 1px #ffffff08}
-.pframe .asph{position:absolute;left:0;right:0;bottom:0;height:38%;
-  background:linear-gradient(#23282c,#14181a);border-top:1px solid #343b40}
-.pframe .asph::after{content:"";position:absolute;top:44%;left:-10%;right:-10%;height:5px;
-  background:repeating-linear-gradient(90deg,#ffd21e55 0 42px,transparent 42px 92px);filter:blur(.4px)}
+.pframe{position:relative;border:3px solid var(--ink);border-radius:20px;overflow:hidden;
+  background:linear-gradient(#d8ff9c,#aef159);
+  box-shadow:0 10px 0 var(--ink), 0 26px 40px rgba(30,60,5,.28)}
+.pframe .asph{position:absolute;left:0;right:0;bottom:0;height:34%;
+  background:linear-gradient(#3c4740,#232b26);border-top:3px solid var(--ink)}
+.pframe .asph::after{content:"";position:absolute;top:44%;left:-10%;right:-10%;height:6px;
+  background:repeating-linear-gradient(90deg,var(--piss) 0 42px,transparent 42px 92px);opacity:.9}
 .pframe img.scene{position:relative;width:100%;height:auto;cursor:pointer;
-  filter:drop-shadow(0 18px 16px rgba(0,0,0,.55));animation:sway 5.4s ease-in-out infinite alternate;transform-origin:20% 90%}
+  filter:drop-shadow(0 16px 12px rgba(30,60,5,.35));animation:sway 5.4s ease-in-out infinite alternate;transform-origin:20% 90%}
 @keyframes sway{to{transform:rotate(.7deg) translateY(-5px)}}
-.spark{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--piss);pointer-events:none;opacity:0;
-  box-shadow:0 0 9px var(--piss2)}
-.poke{position:absolute;left:4%;top:6%;z-index:4;background:#000;color:var(--piss);border:2px solid var(--piss);
-  border-radius:999px;padding:7px 13px;font:700 11px/1 "Chakra Petch",sans-serif;letter-spacing:.14em;
-  transform:rotate(-5deg);box-shadow:4px 4px 0 rgba(0,0,0,.5);animation:bob 2.4s ease-in-out infinite alternate}
+.spark{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--piss);pointer-events:none;opacity:0;
+  border:1.5px solid #a97700}
+.poke{position:absolute;left:4%;top:6%;z-index:4;background:var(--cream);color:var(--ink);border:3px solid var(--ink);
+  border-radius:999px;padding:8px 14px;font:700 11.5px/1 "Chakra Petch",sans-serif;letter-spacing:.12em;
+  transform:rotate(-5deg);box-shadow:4px 4px 0 var(--ink);animation:bob 2.4s ease-in-out infinite alternate}
 @keyframes bob{to{transform:rotate(-5deg) translateY(-7px)}}
 .playnow{position:absolute;right:3%;bottom:5%;z-index:5}
 #drop{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6;border-radius:20px}
 .coin{position:absolute;width:26px;height:26px;border-radius:50%;
-  background:radial-gradient(circle at 34% 30%,#fff6c9,#ffd21e 46%,#b98600 100%);
-  border:2px solid #6d5200;box-shadow:0 0 10px rgba(255,210,30,.45)}
-.coin::after{content:"P";position:absolute;inset:0;display:grid;place-items:center;font:700 12px/1 "Archivo Black",sans-serif;color:#6d5200}
+  background:radial-gradient(circle at 34% 30%,#fff6c9,#ffd21e 46%,#c99200 100%);
+  border:2.5px solid var(--ink);box-shadow:0 2px 0 rgba(18,20,10,.4)}
+.coin::after{content:"P";position:absolute;inset:0;display:grid;place-items:center;font:700 12px/1 "Archivo Black",sans-serif;color:#8a6600}
 .hudrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.chip{border:1px solid var(--line);background:#0f1315;border-radius:8px;padding:7px 11px;
-  font:400 11px/1 "IBM Plex Mono",monospace;color:var(--dim);letter-spacing:.08em}
-.chip b{color:var(--acid);font-weight:600}
+.chip{border:2px solid var(--ink);background:var(--cream);border-radius:8px;padding:7px 11px;
+  font:600 11px/1 "IBM Plex Mono",monospace;color:#3a4715;letter-spacing:.06em}
+.chip b{color:var(--acid);font-weight:700}
 
 /* ---------- sections ---------- */
-section{padding:58px 0}
+section{padding:56px 0}
 .sechead{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;flex-wrap:wrap}
-.sechead h2{font-family:"Archivo Black",sans-serif;font-size:clamp(26px,4.4vw,44px);margin:0;letter-spacing:.03em}
-.sechead .no{font:400 12px/1 "IBM Plex Mono",monospace;color:var(--piss);letter-spacing:.2em}
-.sub{color:var(--dim);font-size:14.5px;line-height:1.6;max-width:70ch;margin:0 0 24px}
+.sechead h2{font-family:"Archivo Black",sans-serif;font-size:clamp(26px,4.4vw,44px);margin:0;letter-spacing:.03em;
+  color:var(--cream);-webkit-text-stroke:3px var(--ink);paint-order:stroke fill;
+  filter:drop-shadow(0 5px 0 #2c3a10)}
+.sechead .no{font:700 12px/1 "IBM Plex Mono",monospace;color:var(--ink);background:var(--piss);
+  padding:6px 9px;border-radius:6px;border:2px solid var(--ink);letter-spacing:.16em}
+.sub{color:#22300c;font-size:15px;line-height:1.6;max-width:70ch;margin:0 0 24px;font-weight:600}
 
 /* ---------- game console ---------- */
-.console{border:1px solid var(--line);border-radius:22px;background:linear-gradient(#15191c,#0d1012);
-  box-shadow:0 24px 60px rgba(0,0,0,.55), inset 0 1px 0 #ffffff0f;padding:14px}
-.cbar{display:flex;align-items:center;gap:10px;padding:4px 6px 12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.cbar .dotr{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);animation:blink 1.6s infinite}
-.cbar .tt{font:600 12px/1 "Chakra Petch";letter-spacing:.22em;color:var(--text)}
+.console{border:3px solid var(--ink);border-radius:22px;background:var(--cream);
+  box-shadow:0 10px 0 var(--ink), 0 26px 44px rgba(30,60,5,.26);padding:14px}
+.cbar{display:flex;align-items:center;gap:10px;padding:4px 6px 12px;border-bottom:3px solid var(--ink);flex-wrap:wrap}
+.cbar .dotr{width:10px;height:10px;border-radius:50%;background:var(--red);border:2px solid var(--ink);animation:blink 1.6s infinite}
+.cbar .tt{font:700 12px/1 "Chakra Petch";letter-spacing:.2em;color:var(--ink)}
 .cbar .sp{flex:1}
-.cbar .st{font:400 11px/1 "IBM Plex Mono",monospace;color:var(--dim);letter-spacing:.1em}
+.cbar .st{font:600 11px/1 "IBM Plex Mono",monospace;color:#4c5b1c;letter-spacing:.08em;background:var(--cream2);
+  border:2px solid var(--ink);border-radius:6px;padding:4px 7px}
 .cwrap{display:grid;grid-template-columns:1fr 258px;gap:14px;padding-top:14px}
-.stage{position:relative;border-radius:14px;overflow:hidden;background:#0a0d0f;border:1px solid #232a2e}
+.stage{position:relative;border-radius:14px;overflow:hidden;background:var(--screen);border:3px solid var(--ink)}
 #game{display:block;width:100%;height:auto;touch-action:none;cursor:crosshair}
-.gmsg{position:absolute;left:50%;top:15%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;
-  font-family:"Archivo Black",sans-serif;font-size:clamp(16px,2.4vw,26px);letter-spacing:.06em;color:#fff;
-  text-shadow:0 4px 0 #000,0 0 30px rgba(255,210,30,.6);opacity:0;transition:opacity .25s}
+.gmsg{position:absolute;left:50%;top:13%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;
+  font-family:"Archivo Black",sans-serif;font-size:clamp(14px,2.1vw,22px);letter-spacing:.05em;color:var(--ink);
+  background:var(--piss);border:3px solid var(--ink);border-radius:999px;padding:9px 18px;white-space:nowrap;
+  box-shadow:0 5px 0 var(--ink);opacity:0;transition:opacity .25s}
 .gmsg.on{opacity:1}
-.gstart{position:absolute;inset:0;display:grid;place-items:center;background:rgba(7,9,11,.86);backdrop-filter:blur(3px);z-index:3;text-align:center;padding:18px}
+.gstart{position:absolute;inset:0;display:grid;place-items:center;background:rgba(13,26,14,.9);z-index:3;text-align:center;padding:18px}
 .gstart.off{display:none}
-.gstart p{color:var(--dim);font-size:13.5px;line-height:1.6;max-width:46ch;margin:12px auto 20px}
+.gstart h3{color:var(--piss)}
+.gstart p{color:#dbe8c4;font-size:13.5px;line-height:1.6;max-width:46ch;margin:12px auto 20px;font-weight:500}
 .meters{display:grid;gap:9px}
-.meter{background:#0f1315;border:1px solid var(--line);border-radius:11px;padding:9px 11px}
-.meter .lab{display:flex;justify-content:space-between;font:400 10.5px/1 "IBM Plex Mono",monospace;color:var(--dim);letter-spacing:.12em;margin-bottom:7px}
-.meter .lab b{color:var(--text);font-weight:600}
-.bar{height:9px;border-radius:6px;background:#22282c;overflow:hidden}
-.bar i{display:block;height:100%;width:0%;border-radius:6px;transition:width .12s linear}
-#bBladder i{background:linear-gradient(90deg,#ffe873,#ffd21e)}
-#bSentry i{background:linear-gradient(90deg,#ff9d3e,#ff4b3e)}
-#bFill i{background:linear-gradient(90deg,#8bfa36,#39d2ff)}
-.book{background:#0f1315;border:1px solid var(--line);border-radius:11px;padding:10px 11px;max-height:196px;overflow:auto}
-.book h4{margin:0 0 8px;font:600 10.5px/1 "IBM Plex Mono",monospace;letter-spacing:.16em;color:var(--dim)}
-.book li{list-style:none;font:400 11.5px/1.35 "IBM Plex Mono",monospace;color:#5d666c;padding:5px 0;border-bottom:1px dashed #232a2e;display:flex;gap:8px}
+.meter{background:var(--cream2);border:2.5px solid var(--ink);border-radius:11px;padding:9px 11px}
+.meter .lab{display:flex;justify-content:space-between;font:600 10.5px/1 "IBM Plex Mono",monospace;color:#4c5b1c;letter-spacing:.1em;margin-bottom:7px}
+.meter .lab b{color:var(--ink);font-weight:700}
+.bar{height:10px;border-radius:6px;background:#e8e2c4;overflow:hidden;border:2px solid var(--ink)}
+.bar i{display:block;height:100%;width:0%;transition:width .12s linear}
+#bBladder i{background:linear-gradient(90deg,#ffe873,#f5b700)}
+#bSentry i{background:linear-gradient(90deg,#ff9d3e,#e6332a)}
+#bFill i{background:linear-gradient(90deg,#8ff33a,#3f9b0d)}
+.book{background:var(--cream2);border:2.5px solid var(--ink);border-radius:11px;padding:10px 11px;max-height:196px;overflow:auto}
+.book h4{margin:0 0 8px;font:700 10.5px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;color:#4c5b1c}
+.book li{list-style:none;font:600 11.5px/1.35 "IBM Plex Mono",monospace;color:#8a8a6d;padding:5px 0;border-bottom:1.5px dashed #cdc6a2;display:flex;gap:8px}
 .book li:last-child{border:0}
 .book li.done{color:var(--acid)}
-.book li.now{color:var(--piss)}
+.book li.now{color:#b07d00}
 .book li em{font-style:normal;opacity:.65}
 .gbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.gbtn{flex:1;min-width:96px;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;
-  padding:11px 8px;font:700 11.5px/1 "Chakra Petch";letter-spacing:.13em;cursor:pointer;
-  box-shadow:inset 0 1px 0 #ffffff12}
-.gbtn:hover{border-color:var(--piss)}
-.gbtn.pump{background:var(--piss);color:#141000;border-color:#000}
-.gbtn:disabled{opacity:.42;cursor:not-allowed}
-.hint{font:400 11px/1.5 "IBM Plex Mono",monospace;color:#5d666c;margin-top:10px;letter-spacing:.04em}
+.gbtn{flex:1;min-width:96px;border:2.5px solid var(--ink);background:var(--cream);color:var(--ink);border-radius:10px;
+  padding:11px 8px;font:700 11.5px/1 "Chakra Petch";letter-spacing:.12em;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.gbtn:hover{background:var(--piss2)}
+.gbtn.pump{background:var(--piss)}
+.gbtn:disabled{opacity:.5;cursor:not-allowed;box-shadow:0 2px 0 var(--ink)}
+.hint{font:600 11px/1.5 "IBM Plex Mono",monospace;color:#3d4a18;margin-top:10px;letter-spacing:.03em}
 
 /* ---------- cards ---------- */
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
-.card{position:relative;min-width:0;border:1px solid var(--line);border-radius:15px;background:var(--panel);padding:15px;
-  overflow:hidden;transition:border-color .2s,transform .2s}
-.card .idx{font:400 10.5px/1 "IBM Plex Mono",monospace;color:var(--piss);letter-spacing:.2em}
-.card h3{font-family:"Archivo Black",sans-serif;font-size:15.5px;margin:9px 0 8px;letter-spacing:.03em}
-.card p{font-size:13.4px;line-height:1.55;color:#aab4ba;margin:0}
-.card.lock .h{filter:blur(7px);opacity:.35;user-select:none}
+.card{position:relative;min-width:0;border:3px solid var(--ink);border-radius:15px;background:var(--cream);padding:15px;
+  overflow:hidden;transition:transform .18s;box-shadow:0 6px 0 var(--ink)}
+.card .idx{font:700 10.5px/1 "IBM Plex Mono",monospace;color:#b07d00;letter-spacing:.18em}
+.card h3{font-family:"Archivo Black",sans-serif;font-size:15.5px;margin:9px 0 8px;letter-spacing:.03em;color:var(--ink)}
+.card p{font-size:13.4px;line-height:1.55;color:#2c3712;margin:0;font-weight:500}
+.card.lock .h{filter:blur(7px);opacity:.3;user-select:none}
 .card.lock::after{content:"LOCKED · MARK CAR " attr(data-n);position:absolute;inset:0;display:grid;place-items:center;
-  background:repeating-linear-gradient(45deg,#0d1012 0 12px,#11161a 12px 24px);
-  font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;color:#4a5359}
-.card.open{border-color:#3e6b22;transform:translateY(-3px)}
+  background:repeating-linear-gradient(45deg,#ffe873 0 14px,#ffd21e 14px 28px);
+  font:700 11px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;color:#7a5a00}
+.card.open{background:#f4ffe4;transform:translateY(-4px)}
 
 /* ---------- notes ---------- */
 .notes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.note{min-width:0;border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden;display:flex;flex-direction:column}
-.note .im{aspect-ratio:4/3;overflow:hidden;background:#0e1214;border-bottom:1px solid var(--line)}
+.note{min-width:0;border:3px solid var(--ink);border-radius:16px;background:var(--cream);overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:0 6px 0 var(--ink)}
+.note .im{aspect-ratio:4/3;overflow:hidden;background:#c6f288;border-bottom:3px solid var(--ink)}
 .note .im img{width:100%;height:100%;object-fit:cover;object-position:center}
 .note .tx{padding:15px}
-.note h3{font-family:"Archivo Black",sans-serif;font-size:15px;margin:0 0 8px;letter-spacing:.03em}
-.note p{margin:0;font-size:13.4px;line-height:1.58;color:#aab4ba}
+.note h3{font-family:"Archivo Black",sans-serif;font-size:15px;margin:0 0 8px;letter-spacing:.03em;color:var(--ink)}
+.note p{margin:0;font-size:13.4px;line-height:1.58;color:#2c3712;font-weight:500}
 
 /* ---------- spec ---------- */
-.spec{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel)}
-.spec .row{display:grid;grid-template-columns:210px 1fr;gap:16px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.spec{border:3px solid var(--ink);border-radius:18px;overflow:hidden;background:var(--cream);box-shadow:0 8px 0 var(--ink)}
+.spec .row{display:grid;grid-template-columns:210px 1fr;gap:16px;padding:18px 20px;border-bottom:2.5px solid var(--ink)}
+.spec .row:nth-child(even){background:var(--cream2)}
 .spec .row:last-child{border:0}
-.spec .k{font-family:"Archivo Black",sans-serif;font-size:15px;letter-spacing:.04em}
-.spec .k em{display:block;font:400 11px/1.4 "IBM Plex Mono",monospace;color:var(--piss);font-style:normal;margin-top:6px;letter-spacing:.12em}
-.spec .v{font-size:13.8px;line-height:1.6;color:#aab4ba}
+.spec .k{font-family:"Archivo Black",sans-serif;font-size:15px;letter-spacing:.04em;color:var(--ink)}
+.spec .k em{display:block;font:700 11px/1.4 "IBM Plex Mono",monospace;color:#b07d00;font-style:normal;margin-top:6px;letter-spacing:.1em}
+.spec .v{font-size:13.8px;line-height:1.6;color:#2c3712;font-weight:500}
 
 /* ---------- footer ---------- */
-footer{border-top:1px solid var(--line);padding:34px 0 60px;background:#08090b}
+footer{border-top:3px solid var(--ink);padding:32px 0 58px;background:var(--cream)}
 .fin{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-.fin img{width:56px;height:56px;border-radius:50%;border:2px solid var(--line);background:#101416}
+.fin img{width:58px;height:58px;border-radius:50%;border:3px solid var(--ink);background:#c6f288}
 .fin .t{flex:1;min-width:200px}
 .fin .t b{font-family:"Archivo Black",sans-serif;letter-spacing:.1em}
-.fin .t p{margin:6px 0 0;color:#5d666c;font-size:12.5px;line-height:1.5}
+.fin .t p{margin:6px 0 0;color:#4c5b1c;font-size:12.5px;line-height:1.5;font-weight:600}
 
 /* ---------- win overlay ---------- */
 #rain{position:fixed;inset:0;pointer-events:none;z-index:140;overflow:hidden}
-#win{position:fixed;inset:0;z-index:150;display:none;place-items:center;background:rgba(6,8,10,.88);padding:20px}
+#win{position:fixed;inset:0;z-index:150;display:none;place-items:center;background:rgba(110,200,30,.82);padding:20px}
 #win.on{display:grid}
-#win .w{max-width:560px;text-align:center;border:2px solid var(--piss);border-radius:20px;background:#0e1214;padding:30px 26px;
-  box-shadow:0 0 90px rgba(255,210,30,.25)}
-#win h2{font-family:"Archivo Black",sans-serif;font-size:clamp(26px,6vw,44px);margin:0 0 6px;color:var(--piss)}
-#win p{color:#b9c3c9;font-size:14.5px;line-height:1.6}
+#win .w{max-width:560px;text-align:center;border:4px solid var(--ink);border-radius:20px;background:var(--cream);padding:30px 26px;
+  box-shadow:0 12px 0 var(--ink)}
+#win h2{font-family:"Archivo Black",sans-serif;font-size:clamp(26px,6vw,46px);margin:0 0 8px;color:var(--cream);
+  -webkit-text-stroke:3px var(--ink);paint-order:stroke fill;filter:drop-shadow(0 5px 0 var(--piss))}
+#win p{color:#2c3712;font-size:14.5px;line-height:1.6;font-weight:500}
 #win img{width:130px;margin:8px auto 4px}
 
 @media(max-width:1000px){
@@ -237,23 +257,21 @@ footer{border-top:1px solid var(--line);padding:34px 0 60px;background:#08090b}
 }
 @media(max-width:560px){
   .cards{grid-template-columns:1fr}
-  section{padding:42px 0}
+  section{padding:40px 0}
   .btn{padding:12px 15px;font-size:12.5px}
   .book{max-height:150px}
+  .tb-btn{padding:6px 9px;font-size:10px;white-space:nowrap}
+  .topbar .in{gap:7px}
 }
 @media (min-width:1000px) and (max-height:780px){
   .hero{padding:16px 0 26px}
-  .mark{font-size:clamp(46px,6.4vw,78px)}
+  .mark{font-size:clamp(46px,6.4vw,80px)}
   .lore{font-size:14px;line-height:1.55;margin-bottom:8px}
   .slog{font-size:19px;margin:10px 0 8px}
   .btns{margin-top:13px}
   .hudrow{margin-top:10px}
   #caBox{margin-top:10px}
   .kicker{margin-bottom:8px}
-}
-@media(max-width:560px){
-  .tb-btn{padding:6px 9px;font-size:10px;white-space:nowrap}
-  .topbar .in{gap:7px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -327,11 +345,11 @@ footer{border-top:1px solid var(--line);padding:34px 0 60px;background:#08090b}
 
     <div class="console">
       <div class="cbar">
-        <span class="dotr"></span><span class="tt">NIGHT ROUND · SECTOR 7</span>
+        <span class="dotr"></span><span class="tt">DAWN ROUND · SECTOR 7</span>
         <span class="sp"></span>
-        <span class="st" id="clock">04:12</span>
+        <span class="st" id="clock">05:48</span>
         <span class="st" id="windTxt">WIND 0 km/h</span>
-        <span class="st">EXT −2°C</span>
+        <span class="st">EXT +4°C</span>
       </div>
       <div class="cwrap">
         <div class="stage">
@@ -341,7 +359,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 60px;background:#08090b}
             <div>
               <h3 style="font-family:'Archivo Black';font-size:clamp(20px,4vw,32px);margin:0;letter-spacing:.04em">START THE ROUND</h3>
               <p>hold the mouse (or your finger, or space) to pour. aim at the front wheel, mind the wind, and stay off the paint — the car watches you and the alarm ends the visit.</p>
-              <button class="btn acid" id="startBtn" style="border-color:#000">▶ BEGIN · 8 CARS</button>
+              <button class="btn acid" id="startBtn">▶ BEGIN · 8 CARS</button>
             </div>
           </div>
         </div>
@@ -902,7 +920,7 @@ function drawCar(x){
   var y=GROUND, w=390, h=120;
   ctx.save();
   /* shadow */
-  ctx.fillStyle="rgba(0,0,0,.45)";
+  ctx.fillStyle="rgba(18,20,10,.3)";
   ctx.beginPath(); ctx.ellipse(x+w/2,y+6,w/2.1,11,0,0,7); ctx.fill();
   /* body */
   ctx.fillStyle=L.col; ctx.strokeStyle="#0a0b0c"; ctx.lineWidth=4;
@@ -917,7 +935,7 @@ function drawCar(x){
   ctx.quadraticCurveTo(x+6,y-14, x+6,y-34);
   ctx.closePath(); ctx.fill(); ctx.stroke();
   /* windows */
-  ctx.fillStyle="#20262b";
+  ctx.fillStyle="#2b3a44";
   ctx.beginPath();
   ctx.moveTo(x+70,y-72); ctx.quadraticCurveTo(x+112,y-112, x+198,y-114);
   ctx.lineTo(x+198,y-72); ctx.closePath(); ctx.fill();
@@ -976,7 +994,7 @@ function drawCar(x){
 function drawDoge(){
   var h=250, w=h*(586/691), x=70, y=GROUND-h;
   ctx.save();
-  ctx.fillStyle="rgba(0,0,0,.4)";
+  ctx.fillStyle="rgba(18,20,10,.28)";
   ctx.beginPath(); ctx.ellipse(x+w/2,GROUND+4,w/2.4,9,0,0,7); ctx.fill();
   var wob=G.hold?Math.sin(G.t*22)*1.6:Math.sin(G.t*1.6)*1.2;
   ctx.translate(x+w/2,GROUND); ctx.rotate(wob*Math.PI/180); ctx.translate(-(x+w/2),-GROUND);
@@ -988,59 +1006,73 @@ function drawScene(){
   var sx=(G.shake>0)?(Math.random()-.5)*10*G.shake:0;
   var sy=(G.shake>0)?(Math.random()-.5)*8*G.shake:0;
   ctx.save(); ctx.translate(sx,sy);
-  /* sky */
+  /* bright dawn sky */
   var g=ctx.createLinearGradient(0,0,0,GROUND);
-  g.addColorStop(0,"#0b1116"); g.addColorStop(1,"#152028");
+  g.addColorStop(0,"#9ff04f"); g.addColorStop(.55,"#c8fa8e"); g.addColorStop(1,"#f2ffd2");
   ctx.fillStyle=g; ctx.fillRect(-20,-20,W+40,GROUND+20);
-  /* stars */
-  ctx.fillStyle="rgba(255,255,255,.35)";
-  for(var i=0;i<34;i++){
-    var px=(i*137.5)%W, py=(i*53)%240;
-    ctx.fillRect(px,py*0.8+12,1.6,1.6);
+  /* sun */
+  var sg=ctx.createRadialGradient(806,108,8,806,108,120);
+  sg.addColorStop(0,"rgba(255,232,115,.95)"); sg.addColorStop(1,"rgba(255,232,115,0)");
+  ctx.fillStyle=sg; ctx.beginPath(); ctx.arc(806,108,120,0,7); ctx.fill();
+  ctx.fillStyle="#ffd21e"; ctx.strokeStyle="#12140a"; ctx.lineWidth=4;
+  ctx.beginPath(); ctx.arc(806,108,40,0,7); ctx.fill(); ctx.stroke();
+  /* clouds */
+  ctx.fillStyle="#ffffff";
+  var cl=[[150,92,44],[430,66,32],[640,126,26]];
+  for(var c1=0;c1<cl.length;c1++){
+    var cx=cl[c1][0]+((G.t*9+c1*90)%(W+300))-150, cy=cl[c1][1], cr=cl[c1][2];
+    ctx.beginPath();
+    ctx.arc(cx,cy,cr*.78,0,7);
+    ctx.arc(cx+cr*.82,cy-cr*.32,cr*.62,0,7);
+    ctx.arc(cx+cr*1.6,cy+cr*.04,cr*.7,0,7);
+    ctx.arc(cx+cr*.8,cy+cr*.36,cr*.72,0,7);
+    ctx.fill();
   }
-  /* far wall */
-  ctx.fillStyle="#0d141a"; ctx.fillRect(-20,GROUND-104,W+40,104);
-  ctx.strokeStyle="#182129"; ctx.lineWidth=2;
-  for(var q=0;q<12;q++){ ctx.beginPath(); ctx.moveTo(q*84,GROUND-104); ctx.lineTo(q*84,GROUND); ctx.stroke(); }
-  /* charging posts in front of the wall */
+  /* back wall */
+  ctx.fillStyle="#e8f6cd"; ctx.fillRect(-20,GROUND-108,W+40,108);
+  ctx.strokeStyle="#12140a"; ctx.lineWidth=4;
+  ctx.beginPath(); ctx.moveTo(-20,GROUND-108); ctx.lineTo(W+20,GROUND-108); ctx.stroke();
+  ctx.strokeStyle="rgba(18,20,10,.18)"; ctx.lineWidth=2.5;
+  for(var q=0;q<12;q++){ ctx.beginPath(); ctx.moveTo(q*84,GROUND-108); ctx.lineTo(q*84,GROUND); ctx.stroke(); }
+  /* charging posts */
   for(var k=0;k<4;k++){
     var bx=36+k*252;
-    ctx.fillStyle="#151c22"; ctx.fillRect(bx,GROUND-150,18,150);
-    ctx.fillStyle="#1c252c"; ctx.fillRect(bx-9,GROUND-188,36,40);
-    ctx.strokeStyle="#101619"; ctx.lineWidth=2; ctx.strokeRect(bx-9,GROUND-188,36,40);
-    ctx.fillStyle=(Math.sin(G.t*2.2+k)>0)?"#3f8f22":"#1a3520";
-    ctx.fillRect(bx-3,GROUND-178,26,7);
-    ctx.strokeStyle="#1a2329"; ctx.lineWidth=3;
-    ctx.beginPath(); ctx.moveTo(bx+18,GROUND-146);
-    ctx.quadraticCurveTo(bx+52,GROUND-104,bx+30,GROUND-16); ctx.stroke();
+    ctx.fillStyle="#fffdf2"; ctx.strokeStyle="#12140a"; ctx.lineWidth=3.5;
+    ctx.fillRect(bx,GROUND-150,20,150); ctx.strokeRect(bx,GROUND-150,20,150);
+    ctx.fillStyle="#fff3c4"; ctx.fillRect(bx-10,GROUND-192,40,44); ctx.strokeRect(bx-10,GROUND-192,40,44);
+    ctx.fillStyle=(Math.sin(G.t*2.2+k)>0)?"#3f9b0d":"#9ec97f";
+    ctx.fillRect(bx-3,GROUND-181,26,9);
+    ctx.strokeStyle="#12140a"; ctx.lineWidth=1.8; ctx.strokeRect(bx-3,GROUND-181,26,9);
+    ctx.strokeStyle="#12140a"; ctx.lineWidth=3.5;
+    ctx.beginPath(); ctx.moveTo(bx+20,GROUND-146);
+    ctx.quadraticCurveTo(bx+56,GROUND-100,bx+32,GROUND-14); ctx.stroke();
   }
   /* asphalt */
   var ag=ctx.createLinearGradient(0,GROUND,0,H);
-  ag.addColorStop(0,"#22282c"); ag.addColorStop(1,"#12171a");
+  ag.addColorStop(0,"#9aa79b"); ag.addColorStop(1,"#7a867c");
   ctx.fillStyle=ag; ctx.fillRect(-20,GROUND,W+40,H-GROUND+20);
-  ctx.strokeStyle="#39424a"; ctx.lineWidth=3;
+  ctx.strokeStyle="#12140a"; ctx.lineWidth=4;
   ctx.beginPath(); ctx.moveTo(-20,GROUND); ctx.lineTo(W+20,GROUND); ctx.stroke();
   /* parking stripes */
-  ctx.strokeStyle="rgba(255,210,30,.24)"; ctx.lineWidth=5;
-  for(var s=0;s<7;s++){
-    ctx.beginPath(); ctx.moveTo(s*170-40,H); ctx.lineTo(s*170+60,GROUND+8); ctx.stroke();
+  ctx.strokeStyle="rgba(255,210,30,.9)"; ctx.lineWidth=6;
+  for(var st=0;st<7;st++){
+    ctx.beginPath(); ctx.moveTo(st*170-40,H); ctx.lineTo(st*170+60,GROUND+8); ctx.stroke();
   }
   /* puddles */
-  for(var p=0;p<G.pud.length;p++){
-    var pu=G.pud[p];
-    ctx.fillStyle="rgba(255,210,30,"+(0.14+pu.a*0.16)+")";
+  for(var pi=0;pi<G.pud.length;pi++){
+    var pu=G.pud[pi];
+    ctx.fillStyle="rgba(240,180,0,"+(0.3+pu.a*0.3)+")";
     ctx.beginPath(); ctx.ellipse(pu.x,pu.y,pu.r*1.9,pu.r*.5,0,0,7); ctx.fill();
   }
   drawCar(G.carX);
   drawDoge();
   /* stream */
-  ctx.save();
   for(var i2=0;i2<G.parts.length;i2++){
     var pa=G.parts[i2];
-    ctx.fillStyle="#ffe873";
-    ctx.beginPath(); ctx.ellipse(pa.x,pa.y,pa.r*1.5,pa.r*2.2,Math.atan2(pa.vy,pa.vx)+1.57,0,7); ctx.fill();
+    ctx.fillStyle="#ffd21e"; ctx.strokeStyle="rgba(18,20,10,.32)"; ctx.lineWidth=1.2;
+    ctx.beginPath(); ctx.ellipse(pa.x,pa.y,pa.r*1.5,pa.r*2.2,Math.atan2(pa.vy,pa.vx)+1.57,0,7);
+    ctx.fill(); ctx.stroke();
   }
-  ctx.restore();
   for(var j=0;j<G.spr.length;j++){
     var sp=G.spr[j];
     ctx.globalAlpha=Math.max(0,1-sp.life/.7);
@@ -1049,14 +1081,14 @@ function drawScene(){
   }
   /* aim crosshair */
   if(G.run&&G.carState==="park"){
-    ctx.strokeStyle=G.hold?"rgba(255,210,30,.9)":"rgba(255,255,255,.35)"; ctx.lineWidth=2;
+    ctx.strokeStyle=G.hold?"#12140a":"rgba(18,20,10,.5)"; ctx.lineWidth=3;
     ctx.beginPath(); ctx.arc(G.aim.x,G.aim.y,13,0,7); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(G.aim.x-20,G.aim.y); ctx.lineTo(G.aim.x-17,G.aim.y);
-    ctx.moveTo(G.aim.x+17,G.aim.y); ctx.lineTo(G.aim.x+20,G.aim.y); ctx.stroke();
-    /* short trajectory hint — direction only, not the landing spot */
+    ctx.beginPath(); ctx.moveTo(G.aim.x-21,G.aim.y); ctx.lineTo(G.aim.x-17,G.aim.y);
+    ctx.moveTo(G.aim.x+17,G.aim.y); ctx.lineTo(G.aim.x+21,G.aim.y); ctx.stroke();
+    /* short trajectory hint */
     var o=originPoint(), sv=solveVel(o,G.aim);
     var vx=sv.vx, vy=sv.vy, px=o.x, py=o.y;
-    ctx.strokeStyle="rgba(255,255,255,.16)"; ctx.setLineDash([4,7]); ctx.lineWidth=2;
+    ctx.strokeStyle="rgba(18,20,10,.28)"; ctx.setLineDash([5,7]); ctx.lineWidth=2.5;
     ctx.beginPath(); ctx.moveTo(px,py);
     for(var t2=0;t2<16;t2++){
       vy+=1500*.016; vx+=LV[Math.min(G.lvl,7)].wind*2.4*.016; px+=vx*.016; py+=vy*.016;
@@ -1067,17 +1099,17 @@ function drawScene(){
   /* wind arrow */
   var L3=LV[Math.min(G.lvl,7)];
   if(G.run&&L3.wind){
-    ctx.strokeStyle="rgba(139,250,54,.55)"; ctx.lineWidth=2.4;
-    var wy=90, dir=L3.wind>0?1:-1, len=Math.min(70,Math.abs(L3.wind)*1.4);
+    ctx.strokeStyle="#12140a"; ctx.lineWidth=3.5;
+    var wy=210, dir=L3.wind>0?1:-1, len=Math.min(74,Math.abs(L3.wind)*1.5);
     ctx.beginPath(); ctx.moveTo(W/2-dir*len/2,wy); ctx.lineTo(W/2+dir*len/2,wy);
-    ctx.lineTo(W/2+dir*len/2-dir*10,wy-7); ctx.moveTo(W/2+dir*len/2,wy); ctx.lineTo(W/2+dir*len/2-dir*10,wy+7);
+    ctx.lineTo(W/2+dir*len/2-dir*12,wy-8); ctx.moveTo(W/2+dir*len/2,wy); ctx.lineTo(W/2+dir*len/2-dir*12,wy+8);
     ctx.stroke();
-    ctx.fillStyle="rgba(139,250,54,.7)"; ctx.font="14px 'IBM Plex Mono',monospace";
-    ctx.textAlign="center"; ctx.fillText("WIND "+Math.abs(L3.wind),W/2,wy-18);
+    ctx.fillStyle="#12140a"; ctx.font="700 15px 'IBM Plex Mono',monospace";
+    ctx.textAlign="center"; ctx.fillText("WIND "+Math.abs(L3.wind),W/2,wy-20);
   }
   /* alarm flash */
   if(G.sentry>60&&G.carState==="park"){
-    ctx.fillStyle="rgba(255,75,62,"+(0.05+0.09*Math.abs(Math.sin(G.t*9)))+")";
+    ctx.fillStyle="rgba(230,51,42,"+(0.06+0.12*Math.abs(Math.sin(G.t*9)))+")";
     ctx.fillRect(-20,-20,W+40,H+40);
   }
   ctx.restore();
@@ -1096,7 +1128,7 @@ resizeCv(); hud(); requestAnimationFrame(loop);
 setInterval(function(){
   var c=document.getElementById("clock");
   var m=12+Math.floor(Date.now()/60000)%40;
-  c.textContent="04:"+String(m).padStart(2,"0");
+  c.textContent="05:"+String(m+8).padStart(2,"0");
 },9000);
 </script>
 </body>
