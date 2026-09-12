@@ -34,7 +34,6 @@ body{
     linear-gradient(180deg,#9ff646 0%,#8ff33a 42%,#7fe62f 100%);
   background-attachment:fixed;
 }
-body.locked{overflow:hidden;height:100vh}
 img{display:block;max-width:100%}
 a{color:inherit}
 .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
@@ -46,25 +45,7 @@ a{color:inherit}
 .grain{background-image:radial-gradient(rgba(255,255,255,.7) .5px,transparent .6px);background-size:3px 3px;mix-blend-mode:overlay;opacity:.12}
 .vig{background:radial-gradient(ellipse at 50% 40%,#0000 56%,rgba(60,110,10,.22) 100%)}
 
-/* ---------- gate ---------- */
-#gate{position:fixed;inset:0;z-index:200;
-  background:radial-gradient(ellipse at 50% 38%,#c8ff86 0%,#8ff33a 46%,#63c916 100%);
-  display:flex;align-items:center;justify-content:center;cursor:pointer;text-align:center;padding:20px}
-#gate .card{max-width:600px}
-#gate .badge{display:inline-block;font-size:12px;letter-spacing:.3em;color:var(--piss);background:var(--ink);
-  padding:8px 15px;border-radius:999px;margin-bottom:20px}
-#gate h1{font-family:"Archivo Black",sans-serif;font-size:clamp(48px,13vw,124px);margin:0;letter-spacing:.04em;
-  background:linear-gradient(#fffdf2 32%,#ffe873 62%,#f0ad00 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  -webkit-text-stroke:4px var(--ink);paint-order:stroke fill;
-  filter:drop-shadow(0 7px 0 #d18f00) drop-shadow(0 13px 0 #12140a)}
-#gate p{color:#20300c;font-size:15.5px;line-height:1.6;margin:18px auto 26px;max-width:440px;font-weight:600}
-#gate .key{display:inline-flex;align-items:center;gap:12px;border:3px solid var(--ink);background:var(--cream);
-  padding:13px 26px;border-radius:999px;font-size:13px;letter-spacing:.2em;color:var(--ink);font-weight:700;
-  box-shadow:0 5px 0 var(--ink)}
-#gate .key b{width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px rgba(230,51,42,.25);animation:blink 1.3s infinite}
 @keyframes blink{50%{opacity:.15}}
-#gate.off{opacity:0;pointer-events:none;transition:opacity .5s}
 
 /* ---------- top bar ---------- */
 .topbar{position:sticky;top:0;z-index:80;background:var(--cream);border-bottom:3px solid var(--ink)}
@@ -276,20 +257,11 @@ footer{border-top:3px solid var(--ink);padding:32px 0 58px;background:var(--crea
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body class="locked">
+<body>
 
 <div class="film scan"></div>
 <div class="film grain"></div>
 <div class="film vig"></div>
-
-<div id="gate">
-  <div class="card">
-    <div class="badge">PARKING LOT · 04:12 · ONE DOG DETECTED</div>
-    <h1>PISSLA</h1>
-    <p>a shiba with sunglasses walks the block every night and marks every white electric car he can reach. the wheel is the target. the alarm is the risk.</p>
-    <div class="key"><b></b> TAP ANYWHERE TO UNLOCK</div>
-  </div>
-</div>
 
 <div class="topbar">
   <div class="in">
@@ -601,17 +573,17 @@ document.addEventListener("visibilitychange",function(){
   else if(MU.on&&!MU.t){ var c=ac(); if(c){ MU.next=c.currentTime+.1; MU.t=setInterval(musSchedule,90);} }
 });
 
-/* ---------- gate ---------- */
-var gate=document.getElementById("gate");
-function openGate(){
-  if(gate.classList.contains("off")) return;
-  gate.classList.add("off"); document.body.classList.remove("locked");
-  ac(); tone(220,660,.22,"square",.05); setTimeout(function(){ tone(660,990,.18,"square",.04); },140);
-  setTimeout(function(){ gate.style.display="none"; },520);
+/* ---------- audio arms on the first interaction (no entry gate) ---------- */
+var audioArmed=false;
+function armAudio(){
+  if(audioArmed) return; audioArmed=true;
+  var c=ac(); if(!c) return;
+  tone(220,660,.2,"square",.045); setTimeout(function(){ tone(660,990,.16,"square",.035); },130);
   if(!MU.on) musToggle();
 }
-gate.addEventListener("click",openGate);
-setTimeout(openGate,25000);
+["pointerdown","keydown","touchstart","wheel"].forEach(function(ev){
+  window.addEventListener(ev,armAudio,{passive:true});
+});
 
 /* ---------- hero coins ---------- */
 var drop=document.getElementById("drop");
