@@ -66,7 +66,7 @@ a{color:inherit}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ---------- hero ---------- */
-.hero{position:relative;padding:26px 0 40px}
+.hero{position:relative;padding:26px 0 18px}
 .hero-in{display:grid;grid-template-columns:1.02fr .98fr;gap:26px;align-items:center}
 .kicker{display:inline-block;font-size:11px;letter-spacing:.3em;color:var(--cream);background:var(--ink);
   padding:7px 12px;border-radius:7px;margin-bottom:14px;font-weight:700}
@@ -176,6 +176,12 @@ section{padding:56px 0}
 .gbtn:disabled{opacity:.5;cursor:not-allowed;box-shadow:0 2px 0 var(--ink)}
 .hint{font:600 11px/1.5 "IBM Plex Mono",monospace;color:#3d4a18;margin-top:10px;letter-spacing:.03em}
 
+.lorestrip{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.lorecard{min-width:0;border:3px solid var(--ink);border-radius:16px;background:var(--cream);padding:16px 18px;box-shadow:0 6px 0 var(--ink)}
+.lorecard h4{margin:0 0 8px;font:700 11px/1 "IBM Plex Mono",monospace;letter-spacing:.18em;color:#b07d00}
+.lorecard p{margin:0;font-size:14.2px;line-height:1.6;color:#2c3712;font-weight:500}
+@media(max-width:760px){.lorestrip{grid-template-columns:1fr}}
+
 /* ---------- cards ---------- */
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
 .card{position:relative;min-width:0;border:3px solid var(--ink);border-radius:15px;background:var(--cream);padding:15px;
@@ -245,7 +251,7 @@ footer{border-top:3px solid var(--ink);padding:32px 0 58px;background:var(--crea
   .topbar .in{gap:7px}
 }
 @media (min-width:1000px) and (max-height:780px){
-  .hero{padding:16px 0 26px}
+  .hero{padding:14px 0 12px}
   .mark{font-size:clamp(46px,6.4vw,80px)}
   .lore{font-size:14px;line-height:1.55;margin-bottom:8px}
   .slog{font-size:19px;margin:10px 0 8px}
@@ -282,8 +288,6 @@ footer{border-top:3px solid var(--ink);padding:32px 0 58px;background:var(--crea
       <h1 class="mark">PISSLA</h1>
       <div class="tick mono">$PISSLA · TICKER</div>
       <p class="slog">nobody knows why i hate these cars. i see one, i mark the wheel, i walk away.</p>
-      <p class="lore">it started on a tuesday. a white electric sedan parked where the fire hydrant used to be, it made no sound at all, and something in me said that thing needs to know who lives here. i have been on schedule ever since.</p>
-      <p class="lore">the job has rules. wheels only, never the paint, never the door handles. the cars have cameras now and the alarm goes off if you aim high, so you learn the wind, you learn the angle, and you keep your tank topped up between rounds.</p>
       <div class="btns">
         <a class="btn soon" id="buyBtn" href="#">BUY $PISSLA</a>
         <a class="btn ghost xLink" id="xBtn" href="#" target="_blank" rel="noopener">FOLLOW ON X</a>
@@ -361,6 +365,15 @@ footer{border-top:3px solid var(--ink);padding:32px 0 58px;background:var(--crea
           <div class="hint">hold = pour · release = stop<br>the puddle on the asphalt is wasted tank</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:10px">
+  <div class="wrap">
+    <div class="lorestrip">
+      <div class="lorecard"><h4>HOW IT STARTED</h4><p>it started on a tuesday. a white electric sedan parked where the fire hydrant used to be, it made no sound at all, and something in me said that thing needs to know who lives here. i have been on schedule ever since.</p></div>
+      <div class="lorecard"><h4>THE RULES</h4><p>the job has rules. wheels only, never the paint, never the door handles. the cars have cameras now and the alarm goes off if you aim high, so you learn the wind, you learn the angle, and you keep your tank topped up between rounds.</p></div>
     </div>
   </div>
 </section>
